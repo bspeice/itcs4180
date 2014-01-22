@@ -64,13 +64,34 @@ public class Vehicle {
 	}
 
 	public String toCSV() {
-		return this.modelYear + this.manufacturerName + this.modelName + 
-				this.horsePower + this.noCylinders + this.noGears;
+		return this.modelYear + "," + this.manufacturerName + "," + this.modelName + "," +  
+				this.horsePower + "," + this.noCylinders + "," + this.noGears;
 	}
 	
 	public String toString() {
 		return "Model Year: " + this.modelYear + " Manufacturer Name: " + this.manufacturerName +
 				" Model Name: " + this.modelName + " Horsepower: " + this.horsePower +
 				" No. Cylinders: " + this.noCylinders + " No. Gears: " + this.noGears;
+	}
+	
+	// Need to implement both equals() and hashCode() for guaranteeing unique Sets
+	// http://stackoverflow.com/questions/16238182/hashset-contains-duplicate-entries
+	// Also:
+	// http://www.coderanch.com/t/572755/java-programmer-SCJP/certification/HashSet-adding-duplicates-hashcode-obects
+	@Override
+	public boolean equals(Object _v2) {
+		Vehicle v2 = (Vehicle) _v2;
+		return ((this.modelYear == v2.modelYear) &&
+				(this.manufacturerName.equals(v2.manufacturerName)) &&
+				(this.modelName.equals(v2.modelName)) &&
+				(this.horsePower == v2.horsePower) &&
+				(this.noCylinders == v2.noCylinders) &&
+				(this.noGears == v2.noGears));
+	}
+	
+	@Override
+	public int hashCode() {
+		return this.modelYear + this.manufacturerName.hashCode() + this.modelName.hashCode() +
+				this.horsePower + this.noCylinders + this.noGears;
 	}
 }

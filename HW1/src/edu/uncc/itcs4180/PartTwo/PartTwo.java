@@ -41,10 +41,10 @@ public class PartTwo {
 			
 			reader.close();			
 		} catch (FileNotFoundException e) {
-			System.out.println("Could not open file: " + filename);
+			System.err.println("Could not open file: " + filename);
 			return;
 		} catch (IOException e) {
-			System.out.println("Error reading the CSV file.");
+			System.err.println("Error reading the CSV file.");
 			return;
 		}
 		
@@ -61,7 +61,7 @@ public class PartTwo {
 			
 			writer.close();
 		} catch (IOException e) {
-			System.err.println("Error writing unique vehicles to CSV");
+			System.err.println("Error writing unique vehicles to CSV.\n" + e.getMessage());
 			// Don't return here, we can still complete the rest of the program
 		}
 		
