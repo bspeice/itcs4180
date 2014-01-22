@@ -1,4 +1,4 @@
-package edu.uncc.itcs4180;
+package edu.uncc.itcs4180.PartTwo;
 
 /* Assignment: Homework 1
  * File name: PartOne.java
@@ -8,5 +8,9 @@ package edu.uncc.itcs4180;
  */
 
 public class PartTwo {
+	
+	public static void main(String[] args) {
+		
+	}
 
 }
