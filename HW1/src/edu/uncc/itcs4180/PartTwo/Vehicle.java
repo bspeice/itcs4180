@@ -63,4 +63,8 @@ public class Vehicle {
 		this.noGears = noGears;
 	}
 
+	public String toCSV() {
+		return this.modelYear + this.manufacturerName + this.modelName + 
+				this.horsePower + this.noCylinders + this.noGears;
+	}
 }

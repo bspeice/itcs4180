@@ -1,12 +1,17 @@
 package edu.uncc.itcs4180.PartTwo;
 
-import java.io.BufferedInputStream;
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 /* Assignment: Homework 1
  * File name: PartOne.java
@@ -21,6 +26,7 @@ public class PartTwo {
 		
 		// Set up reading the actual data
 		String filename = "raw_data.csv";
+		String outputFilename = "distinct_vehicles.csv";
 		List<Vehicle> vehicles;
 		
 		// Read in all of our data
@@ -32,6 +38,7 @@ public class PartTwo {
 			while ((line = reader.readLine()) != null)
 				vehicles.add(readVehicle(line));
 			
+			reader.close();			
 		} catch (FileNotFoundException e) {
 			System.out.println("Could not open file: " + filename);
 			return;
@@ -40,7 +47,43 @@ public class PartTwo {
 			return;
 		}
 		
-		// If we've made it here, we have the final list of all our vehicles
+		// If we've made it here, we have the final list of all our vehicles,
+		// but we need to find just the unique ones.
+		Set<Vehicle> uniqueVehicles = new HashSet<Vehicle>(vehicles);
+		
+		// Write the unique vehicles to another CSV file
+		try {
+			BufferedWriter writer = new BufferedWriter(new FileWriter(outputFilename));
+			
+			for (Vehicle v : uniqueVehicles)
+				writer.write(v.toCSV() + "\n");
+			
+			writer.close();
+		} catch (IOException e) {
+			System.err.println("Error writing unique vehicles to CSV");
+			// Don't return here, we can still complete the rest of the program
+		}
+		
+		// Count the vehicles by modelYear and manufacturerName
+		Map<String, Integer> vehicleCount = new HashMap<String, Integer>();
+		for (Vehicle v : uniqueVehicles)
+			if (vehicleCount.containsKey(vehicleMapString(v)))
+				vehicleCount.put(vehicleMapString(v), vehicleCount.get(vehicleMapString(v)) + 1);
+		
+		// Print out the results of our counting
+		// Convert to Set for iteration - http://stackoverflow.com/questions/1066589/java-iterate-through-hashmap
+		int counter = 1;
+		for (Map.Entry<String, Integer> v : vehicleCount.entrySet()) {
+			System.out.println(counter + "-" + v.getKey() + ":" + v.getValue());
+			counter++;
+		}
+		System.out.println("--------------------------------------------------" + 
+							"------------------------------");
+		System.out.println("Total: " + (counter - 1));
+		System.out.println("--------------------------------------------------" + 
+				"------------------------------");
+		
+		// Now we need to sort our counting, and get the top 10 results.
 	}
 	
 	private static Vehicle readVehicle(String line) {
@@ -57,5 +100,9 @@ public class PartTwo {
 			return null;
 		}
 	}
-
+	
+	private static String vehicleMapString(Vehicle v) {
+		return v.getModelName() + " - "  + v.getManufacturerName();
+	}
+	
 }
