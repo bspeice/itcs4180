@@ -16,6 +16,16 @@ public class Vehicle {
 	private int noCylinders;
 	private int noGears;
 	
+	public Vehicle(int modelYear, String manufacturerName, String modelName,
+			int horsePower, int noCylinders, int noGears) {
+		this.modelYear = modelYear;
+		this.manufacturerName = manufacturerName;
+		this.modelName = modelName;
+		this.horsePower = horsePower;
+		this.noCylinders = noCylinders;
+		this.noGears = noGears;
+	}
+	
 	public int getModelYear() {
 		return modelYear;
 	}
