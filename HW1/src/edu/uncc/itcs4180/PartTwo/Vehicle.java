@@ -67,4 +67,10 @@ public class Vehicle {
 		return this.modelYear + this.manufacturerName + this.modelName + 
 				this.horsePower + this.noCylinders + this.noGears;
 	}
+	
+	public String toString() {
+		return "Model Year: " + this.modelYear + " Manufacturer Name: " + this.manufacturerName +
+				" Model Name: " + this.modelName + " Horsepower: " + this.horsePower +
+				" No. Cylinders: " + this.noCylinders + " No. Gears: " + this.noGears;
+	}
 }

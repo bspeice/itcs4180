@@ -7,6 +7,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -84,17 +85,33 @@ public class PartTwo {
 				"------------------------------");
 		
 		// Now we need to sort our counting, and get the top 10 results.
+		// The way this is done is to convert the Map to a Set natively, then the Set to a List
+		// This way, we preserve all Key-Value pairs during the sort.
+		// Finally, Collections.sort() goes in ascending order, so reverse that instead of taking
+		// the elements off the end of the list.
+		List<Map.Entry<String, Integer>> vehicleCountList = new ArrayList<Map.Entry<String, Integer>>(vehicleCount.entrySet());
+		Collections.sort(vehicleCountList, Collections.reverseOrder(new VehicleEntryComparator()));
+		
+		System.out.println("--------------------------------------------------" +
+						"\nTop 10 Models:" +
+						"--------------------------------------------------");
+		// Go to the top 10 results, or full list, whichever comes first
+		for (int i = 0; i < vehicleCountList.size() && i < 10; i++)
+			System.out.println(i + "-" + vehicleCountList.get(i).getKey() + ":" +
+					vehicleCountList.get(i).getValue());
+			
 	}
 	
 	private static Vehicle readVehicle(String line) {
 		String[] elements = line.split(",");
 		try {
+			// Note that there is an extra column in the data - "Car/Truck/Both" in col. 4
 			return new Vehicle(Integer.parseInt(elements[0]), // Model Year
 					elements[1], // Manufacturer Name
 					elements[2], // Model Name
-					Integer.parseInt(elements[3]), // Horsepower
-					Integer.parseInt(elements[4]), // No. Cylinders
-					Integer.parseInt(elements[5])); // No. Gears
+					Integer.parseInt(elements[4]), // Horsepower
+					Integer.parseInt(elements[5]), // No. Cylinders
+					Integer.parseInt(elements[6])); // No. Gears
 		} catch (IndexOutOfBoundsException e) {
 			System.err.println("Improperly formatted CSV file.");
 			return null;
