@@ -70,6 +70,8 @@ public class PartTwo {
 		for (Vehicle v : uniqueVehicles)
 			if (vehicleCount.containsKey(vehicleMapString(v)))
 				vehicleCount.put(vehicleMapString(v), vehicleCount.get(vehicleMapString(v)) + 1);
+			else
+				vehicleCount.put(vehicleMapString(v), 1);
 		
 		// Print out the results of our counting
 		// Convert to Set for iteration - http://stackoverflow.com/questions/1066589/java-iterate-through-hashmap
@@ -93,11 +95,11 @@ public class PartTwo {
 		Collections.sort(vehicleCountList, Collections.reverseOrder(new VehicleEntryComparator()));
 		
 		System.out.println("--------------------------------------------------" +
-						"\nTop 10 Models:" +
+						"\nTop 10 Models:\n" +
 						"--------------------------------------------------");
 		// Go to the top 10 results, or full list, whichever comes first
 		for (int i = 0; i < vehicleCountList.size() && i < 10; i++)
-			System.out.println(i + "-" + vehicleCountList.get(i).getKey() + ":" +
+			System.out.println((i + 1) + "-" + vehicleCountList.get(i).getKey() + ":" +
 					vehicleCountList.get(i).getValue());
 			
 	}
@@ -119,7 +121,7 @@ public class PartTwo {
 	}
 	
 	private static String vehicleMapString(Vehicle v) {
-		return v.getModelName() + " - "  + v.getManufacturerName();
+		return v.getModelYear() + "-"  + v.getManufacturerName();
 	}
 	
 }
