@@ -4,7 +4,7 @@
  * Homework 1
  * PartOne.java
  */
-package edu.uncc.itcs4180;
+package com.uncc.itcs4180.PartOne;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -31,7 +31,7 @@ public class PartOne
 		//We need a try catch block so we can handle any potential IO errors 
 		try 
 		{ 
-			//Try block so we can use ÅefinallyÅf and close BufferedReader 
+			//Try block so we can use finally? and close BufferedReader 
 			try 
 			{ 
 				inputStream = new BufferedReader(new FileReader(filePath)); 
@@ -72,7 +72,7 @@ public class PartOne
 		//We need a try catch block so we can handle any potential IO errors 
 		try 
 		{ 
-			//Try block so we can use ÅefinallyÅf and close BufferedReader 
+			//Try block so we can use finally and close BufferedReader 
 			try 
 			{ 
 				inputStream = new BufferedReader(new FileReader(filePath)); 
@@ -110,90 +110,6 @@ public class PartOne
 		    System.out.print(user.getMinit()+ " ");
 		    System.out.print(user.getLname()+ " ");
 		    System.out.println(user.getAge());
-		}
-	}
-}
-
-class User
-{
-	private String fname;
-	private char minit;
-	private String lname;
-	private int age;
-	
-	public User()
-	{
-		fname = "Default";
-		minit = 'D';
-		lname = "User";
-		age = 0;
-	}
-	
-	public User(String fname, char minit, String lname, int age)
-	{
-		this.fname = fname;
-		this.minit = minit;
-		this.lname = lname;
-		this.age = age;
-	}
-	
-	public String getFname()
-	{
-		return this.fname;
-	}
-	
-	public char getMinit()
-	{
-		return this.minit;
-	}
-	
-	public String getLname()
-	{
-		return this.lname;
-	}
-	
-	public int getAge()
-	{
-		return this.age;
-	}
-	
-	public boolean equals(User user)
-	{
-		if(this.fname.equals(user.getFname()) && this.minit==user.getMinit() && this.lname.equals(user.getLname()) && this.age==user.getAge())
-		{
-			return true;
-		}
-		else
-		{
-			return false;
-		}
-	}
-	
-	public String toString()
-	{
-		String userString = fname+" "+minit+" "+lname+" "+age;
-		return userString;
-	}
-}
-
-class UserComparator implements Comparator<User>
-{
-	public int compare(User a, User b)
-	{
-		if(a.getFname().equals(b.getFname()) && a.getMinit()==b.getMinit() && a.getLname().equals(b.getLname()) && a.getAge()==b.getAge())
-		{
-			return 0;
-		}
-		else
-		{
-			if(a.getAge()>b.getAge())
-			{
-				return 1;
-			}
-			else
-			{
-				return -1;
-			}
 		}
 	}
 }
