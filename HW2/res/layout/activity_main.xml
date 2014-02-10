@@ -65,7 +65,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="@string/rad10Pct"
-                android:textSize="9sp" />
+                android:textSize="9sp" 
+                android:checked="true"/>
 
             <RadioButton
                 android:id="@+id/rad25Pct"
