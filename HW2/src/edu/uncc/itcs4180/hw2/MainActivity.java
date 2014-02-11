@@ -17,18 +17,23 @@ import android.widget.SeekBar;
 import android.widget.SeekBar.OnSeekBarChangeListener;
 import android.widget.TextView;
 
+// Our main activity implements a lot of different functionality.
+// If we had even more things we needed to add, likely need to split off
+// into separate files. As it stands though, for purpose of project,
+// easier to leave it in one area.
 public class MainActivity extends Activity implements OnCheckedChangeListener,
 		OnSeekBarChangeListener, View.OnClickListener, TextWatcher 
 {
-	final static double TEN = .10;
-	final static double TWOFIVE = .25;
-	final static double FIVEZERO = .50;
+	final static double TEN_PERCENT = .10;
+	final static double TWENTY_FIVE_PERCENT = .25;
+	final static double FIFTY_PERCENT = .50;
 	RadioGroup percents;
 	SeekBar customBar;
 	Button exit;
 	EditText listPrice;
 	TextView saved, paid, customPercent;
 	NumberFormat currencyFormat, percentFormat;
+	int currentCustomPercent;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) 
@@ -66,6 +71,7 @@ public class MainActivity extends Activity implements OnCheckedChangeListener,
 	public void onProgressChanged(SeekBar bar, int progress, boolean fromUser) 
 	{
 		customPercent.setText(percentFormat.format(progress/100.0));
+		currentCustomPercent = progress;
 	}
 
 	@Override
@@ -84,32 +90,28 @@ public class MainActivity extends Activity implements OnCheckedChangeListener,
 	@Override
 	public void onClick(View v) 
 	{
-		// TODO Auto-generated method stub
+		// Exit button is the only thing to click on this application
 		finish();
 	}
 
 	@Override
 	public void onCheckedChanged(RadioGroup rg, int checkedId) 
 	{
-		// TODO Auto-generated method stub
 		updateCost();
 	}
 
 	@Override
 	public void afterTextChanged(Editable arg0) {
-		// TODO Auto-generated method stub
 		updateCost();
 	}
 
 	@Override
 	public void beforeTextChanged(CharSequence arg0, int arg1, int arg2,
 			int arg3) {
-		// TODO Auto-generated method stub
 	}
 
 	@Override
 	public void onTextChanged(CharSequence arg0, int arg1, int arg2, int arg3) {
-		// TODO Auto-generated method stub
 		updateCost();
 		if(listPrice.getText().toString().trim().equals(""))
 		{
@@ -125,24 +127,23 @@ public class MainActivity extends Activity implements OnCheckedChangeListener,
 			double startPrice = Double.parseDouble(listPrice.getText().toString());
 			if (((RadioButton)findViewById(R.id.rad10Pct)).isChecked()) 
 			{
-				savedAmount=startPrice * TEN;
-				paidAmount=startPrice * (1 - TEN);
+				savedAmount=startPrice * TEN_PERCENT;
+				paidAmount=startPrice * (1 - TEN_PERCENT);
 			} 
 			else if (((RadioButton)findViewById(R.id.rad25Pct)).isChecked())  
 			{
-				savedAmount=startPrice * TWOFIVE;
-				paidAmount=startPrice * (1 - TWOFIVE);
+				savedAmount=startPrice * TWENTY_FIVE_PERCENT;
+				paidAmount=startPrice * (1 - TWENTY_FIVE_PERCENT);
 			} 
 			else if (((RadioButton)findViewById(R.id.rad50Pct)).isChecked()) 
 			{
-				savedAmount=startPrice * FIVEZERO;
-				paidAmount=startPrice * (1 - FIVEZERO);
+				savedAmount=startPrice * FIFTY_PERCENT;
+				paidAmount=startPrice * (1 - FIFTY_PERCENT);
 			} 
 			else 
 			{
-				int percentage=Integer.parseInt(customPercent.getText().toString().replaceAll("[\\D]",""));
-				savedAmount=startPrice * percentage/100;
-				paidAmount=startPrice * (1 - percentage/100);
+				savedAmount=startPrice * currentCustomPercent/100;
+				paidAmount=startPrice * (1 - currentCustomPercent/100);
 			} 
 		} 
 		catch (Exception e) 
