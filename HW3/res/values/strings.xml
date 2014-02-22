@@ -8,5 +8,10 @@
     <string name="btnNewGame">New Game</string>
     <string name="btnUnCover">UnCover</string>
     <string name="title_activity_result">ResultActivity</string>
+    <string name="txtResultValue_Success">Congratulations, you unlocked the treasure chest!</string>
+    <string name="txtResultValue_Failure">Sorry! Try again ..</string>
+    <string name="txtResultElapsed">Time elapsed :</string>
+    <string name="btnExit">Exit</string>
+    <string name="btnTryAgain">Try Again</string>
 
 </resources>
