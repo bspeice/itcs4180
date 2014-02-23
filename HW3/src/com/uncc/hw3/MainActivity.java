@@ -1,5 +1,12 @@
 package com.uncc.hw3;
 
+/*
+ * Bradlee Speice, Brandon Rodenmayer
+ * ITIS 4180
+ * Homework 3
+ * MainActivity.java
+ */
+
 import android.os.Bundle;
 import android.app.Activity;
 import android.view.Menu;
