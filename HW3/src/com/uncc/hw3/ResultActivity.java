@@ -49,8 +49,12 @@ public class ResultActivity extends Activity {
 	
 	public void onClick(View v) {
 		// Figure out if the Try Again or Exit button was clicked
+		Intent intent = new Intent(this, MainActivity.class);
 		if (v.getId() == R.id.btnTryAgain)
-			startActivity(new Intent(this, MainActivity.class));
+		{
+			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+			startActivity(intent);
+		}
 		else if (v.getId() == R.id.btnExit)
 			finish();
 	}

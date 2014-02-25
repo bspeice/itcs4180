@@ -194,7 +194,8 @@
             android:layout_width="0dp"
             android:layout_height="40dp"
             android:layout_weight="1"
-            android:text="@string/btnNewGame" />
+            android:text="@string/btnNewGame" 
+            android:onClick="newGame"/>
 
         <Button
             android:id="@+id/btnUnCover"
@@ -202,7 +203,8 @@
             android:layout_width="0dp"
             android:layout_height="40dp"
             android:layout_weight="1"
-            android:text="@string/btnUnCover" />
+            android:text="@string/btnUnCover" 
+            android:onClick="uncover" />
     </LinearLayout>
 
 </LinearLayout>
