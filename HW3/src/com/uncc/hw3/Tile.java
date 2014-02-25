@@ -10,7 +10,7 @@ import android.widget.ImageView;
  * Bradlee Speice, Brandon Rodenmayer
  * ITIS 4180
  * Homework 3
- * ResultActivity.java
+ * Tile.java
  */
 
 public class Tile implements View.OnClickListener
