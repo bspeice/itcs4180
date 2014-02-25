@@ -38,6 +38,10 @@ public class MainActivity extends Activity
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		
+		// If the result activity calls us with an EXIT in the extras, quit.
+		if (getIntent().getBooleanExtra("EXIT", false))
+			finish();
+		
 		newGame((View)findViewById(R.id.LinearLayout1));
 		focusImages.get(focusIndex).show();
 	}

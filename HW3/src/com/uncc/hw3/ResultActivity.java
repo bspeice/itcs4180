@@ -55,8 +55,11 @@ public class ResultActivity extends Activity {
 			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 			startActivity(intent);
 		}
-		else if (v.getId() == R.id.btnExit)
-			finish();
+		else if (v.getId() == R.id.btnExit){
+			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+			intent.putExtra("EXIT", true);
+			startActivity(intent);
+		}
 	}
 
 }
