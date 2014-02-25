@@ -109,7 +109,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:gravity="fill_horizontal" >
+        android:gravity="fill_horizontal"
+        android:orientation="horizontal" >
 
         <ImageView
             android:id="@+id/imgTile3_1"
