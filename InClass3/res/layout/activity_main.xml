@@ -8,9 +8,23 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".MainActivity" >
 
-    <TextView
+    <Button
+        android:id="@+id/btnThread"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/hello_world" />
+        android:layout_alignLeft="@+id/btnAsync"
+        android:layout_alignParentTop="true"
+        android:layout_alignRight="@+id/btnAsync"
+        android:layout_marginTop="100dp"
+        android:text="Generate Image Thread" />
+
+    <Button
+        android:id="@+id/btnAsync"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/btnThread"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="25dp"
+        android:text="Generate Image AsyncTask" />
 
 </RelativeLayout>

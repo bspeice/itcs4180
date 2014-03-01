@@ -22,6 +22,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name="edu.uncc.itcs4180.hw4.PhotoActivity"
+            android:label="@string/title_activity_photo" >
+        </activity>
+        <activity
+            android:name="edu.uncc.itcs4180.hw4.PhotoThread"
+            android:label="@string/title_activity_photo_thread" >
+        </activity>
     </application>
 
 </manifest>
