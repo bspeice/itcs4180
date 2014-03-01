@@ -16,6 +16,7 @@
         android:layout_alignParentTop="true"
         android:layout_alignRight="@+id/btnAsync"
         android:layout_marginTop="100dp"
+        android:onClick="onClick"
         android:text="Generate Image Thread" />
 
     <Button
@@ -25,6 +26,7 @@
         android:layout_below="@+id/btnThread"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="25dp"
+        android:onClick="onClick"
         android:text="Generate Image AsyncTask" />
 
 </RelativeLayout>
