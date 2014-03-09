@@ -1,5 +1,12 @@
 package edu.uncc.itcs4180.hw4;
 
+/*
+ * Bradlee Speice, Brandon Rodenmayer
+ * ITIS 4180
+ * In Class 3
+ * PhotoActivity.java
+ */
+
 import java.net.URL;
 import java.util.ArrayList;
 

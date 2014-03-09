@@ -1,5 +1,12 @@
 package edu.uncc.itcs4180.hw4;
 
+/*
+ * Bradlee Speice, Brandon Rodenmayer
+ * ITIS 4180
+ * In Class 3
+ * MainActivity.java
+ */
+
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;

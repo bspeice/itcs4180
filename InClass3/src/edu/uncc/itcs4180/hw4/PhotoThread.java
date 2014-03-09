@@ -1,5 +1,12 @@
 package edu.uncc.itcs4180.hw4;
 
+/*
+ * Bradlee Speice, Brandon Rodenmayer
+ * ITIS 4180
+ * In Class 3
+ * PhotoThread.java
+ */
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
