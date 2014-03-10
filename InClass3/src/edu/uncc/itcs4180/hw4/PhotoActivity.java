@@ -33,9 +33,10 @@ public class PhotoActivity extends Activity {
 	ProgressDialog progress;
 	LinearLayout root;
 	GridView photoGrid;
-	public int[] imageUrlIds = {R.string.uncc_main_image, R.string.football_main_image,
+	int[] imageUrlIds = {R.string.uncc_main_image, R.string.football_main_image,
 			R.string.ifest_main_image, R.string.commencement_main_image
 	};
+	int[] imageNames = {R.string.uncc, R.string.sports, R.string.ifest, R.string.commencement};
 	ArrayList<Bitmap> bitmapList = new ArrayList<Bitmap>();
 	int downloadProgress;
 	
@@ -98,17 +99,14 @@ public class PhotoActivity extends Activity {
 		@Override
 		protected void onPostExecute(Bitmap result)
 		{
-			if (result == null)//set failed images to a default image
-			{
-				//set blank image
-			}
-
+			//already a default picture included in grid_schema.xml, so no need to set a blank pic
 			bitmapList.add(result);
 			
 			downloadProgress++;
 			if(downloadProgress>=imageUrlIds.length)
 			{
 				progress.dismiss();
+				//all images are loaded, so set them in the grid
 				photoGrid.setAdapter(new ImageAdapter(photoGrid.getContext()));
 			}
 		}
@@ -130,13 +128,13 @@ public class PhotoActivity extends Activity {
 		}
 
 		@Override
-		public Object getItem(int position) 
+		public Object getItem(int position)//no purpose. only to fill the requirement of needing the method.
 		{
 			return position;
 		}
 
 		@Override
-		public long getItemId(int position) 
+		public long getItemId(int position)//no purpose. only to fill the requirement of needing the method.
 		{
 			return position;
 		}
@@ -149,25 +147,31 @@ public class PhotoActivity extends Activity {
 			
 			if(vi == null)
 			{
+				//create layout of what we want one grid section to look like
 				vi = getLayoutInflater().inflate(R.layout.grid_schema, null);
 				
 				holder.textView = (TextView)vi.findViewById(R.id.textView1);
 				holder.imageView = (ImageView)vi.findViewById(R.id.imageView1);
 				
-				vi.setTag(holder);
+				vi.setTag(holder);//associate the views in the holder to the grid
 			}
 			else
 			{
 				holder = (Holder)(vi.getTag());
 			}
-			holder.textView.setText(imageUrlIds[position]);
+			//set the views in the grid to what was loaded
+			holder.textView.setText(getString(R.string.download_error));
 			if(bitmapList.get(position)!=null)
+			{
 				holder.imageView.setImageBitmap(bitmapList.get(position));
+				holder.textView.setText(getString(imageNames[position]));	
+			}
 			
 			return vi;
 		}
 	}
 	
+	//views included in one grid section
 	static class Holder
 	{
 		TextView textView;

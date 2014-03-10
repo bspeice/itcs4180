@@ -10,6 +10,11 @@
     <string name="football_main_image">http://farm9.staticflickr.com/8441/7882624916_5f62cb318f_z.jpg</string>
     <string name="title_activity_photo">UNC Charlotte Photos</string>
     <string name="title_activity_photo_thread">UNC Charlotte Photos</string>
-    <string name="Exit">Exit</string>
+    <string name="exit_button_text">Exit</string>
+    <string name="download_error">Error Downloading</string>
+    <string name="uncc">UNC Charlotte</string>
+    <string name="sports">Sports</string>
+    <string name="ifest">Ifest</string>
+    <string name="commencement">Commencement</string>
 
 </resources>

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <integer name="ROW_COUNT">2</integer>
-    <integer name="COLUMN_COUNT">2</integer>
+    <integer name="column_count">2</integer>
+    <dimen name="image_width">140dp</dimen>
+    <dimen name="image_height">140dp</dimen>
 </resources>

@@ -15,7 +15,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1" 
-        android:numColumns="@integer/COLUMN_COUNT" 
+        android:numColumns="@integer/column_count" 
         android:columnWidth="90dp" />
     
     <Button
@@ -23,6 +23,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
-        android:text="@string/Exit" />
+        android:text="@string/exit_button_text" />
 
 </LinearLayout>
