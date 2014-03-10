@@ -46,8 +46,8 @@ public class PhotoActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_photo);
 		
-		root = (LinearLayout)findViewById(R.id.LinearLayout1);
-		photoGrid = (GridView)findViewById(R.id.GridView1);
+		root = (LinearLayout)findViewById(R.id.layout_async);
+		photoGrid = (GridView)findViewById(R.id.grid_async);
 		downloadProgress = 0;
 		
 		//set the progress dialog
@@ -62,7 +62,7 @@ public class PhotoActivity extends Activity {
 		}
 		
 		//create exit button
-		Button exit = (Button)findViewById(R.id.ExitButton);
+		Button exit = (Button)findViewById(R.id.btn_exit_async);
 		exit.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v)
 			{

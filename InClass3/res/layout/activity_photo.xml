@@ -1,6 +1,6 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/LinearLayout1"
+    android:id="@+id/layout_async"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
@@ -11,15 +11,15 @@
     tools:context=".PhotoActivity" >
 
     <GridView
-        android:id="@+id/GridView1"
+        android:id="@+id/grid_async"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1" 
-        android:numColumns="@integer/column_count" 
-        android:columnWidth="90dp" />
+        android:layout_weight="1"
+        android:columnWidth="90dp"
+        android:numColumns="@integer/column_count" />
     
     <Button
-        android:id="@+id/ExitButton"
+        android:id="@+id/btn_exit_async"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
