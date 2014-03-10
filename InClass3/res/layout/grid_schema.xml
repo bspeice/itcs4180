@@ -8,12 +8,16 @@
         android:id="@+id/imageView1"
         android:layout_width="@dimen/image_width"
         android:layout_height="@dimen/image_height"
+        android:layout_gravity="center"
+        android:padding="@dimen/image_padding"
         android:src="@drawable/ic_launcher" />
 
     <TextView
         android:id="@+id/textView1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:ems="10" />
+        android:ems="10"
+        android:gravity="center"
+        android:text="@string/download_error" />
 
 </LinearLayout>

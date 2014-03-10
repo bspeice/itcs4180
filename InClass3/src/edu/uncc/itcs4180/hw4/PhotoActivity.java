@@ -38,6 +38,7 @@ public class PhotoActivity extends Activity {
 	};
 	int[] imageNames = {R.string.uncc, R.string.sports, R.string.ifest, R.string.commencement};
 	ArrayList<Bitmap> bitmapList = new ArrayList<Bitmap>();
+	ArrayList<String> bitmapNames = new ArrayList<String>();
 	int downloadProgress;
 	
 	@Override
@@ -101,6 +102,7 @@ public class PhotoActivity extends Activity {
 		{
 			//already a default picture included in grid_schema.xml, so no need to set a blank pic
 			bitmapList.add(result);
+			bitmapNames.add(getString(imageNames[downloadProgress]));
 			
 			downloadProgress++;
 			if(downloadProgress>=imageUrlIds.length)
@@ -164,7 +166,7 @@ public class PhotoActivity extends Activity {
 			if(bitmapList.get(position)!=null)
 			{
 				holder.imageView.setImageBitmap(bitmapList.get(position));
-				holder.textView.setText(getString(imageNames[position]));	
+				holder.textView.setText(bitmapNames.get(position));	
 			}
 			
 			return vi;
