@@ -6,7 +6,7 @@ package edu.uncc.itcs4180.hw4;
  * In Class 3
  * PhotoActivity.java
  */
-
+ 
 import java.net.URL;
 import java.util.ArrayList;
 
@@ -17,6 +17,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,6 +26,7 @@ import android.widget.Button;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 public class PhotoActivity extends Activity {
 
@@ -142,21 +144,33 @@ public class PhotoActivity extends Activity {
 		@Override
 		public View getView(int position, View convertView, ViewGroup parent) 
 		{
-			ImageView newImageView = new ImageView(getBaseContext());
+			Holder holder = new Holder();
+			View vi = convertView;
 			
-			if(convertView == null)
+			if(vi == null)
 			{
-				newImageView.setLayoutParams(new GridView.LayoutParams(
-						140, 140));
-				newImageView.setPadding(5, 5, 5, 5);
+				vi = getLayoutInflater().inflate(R.layout.grid_schema, null);
+				
+				holder.textView = (TextView)vi.findViewById(R.id.textView1);
+				holder.imageView = (ImageView)vi.findViewById(R.id.imageView1);
+				
+				vi.setTag(holder);
 			}
 			else
 			{
-				newImageView = (ImageView) convertView;
+				holder = (Holder)(vi.getTag());
 			}
-			newImageView.setImageBitmap(bitmapList.get(position));
+			holder.textView.setText(imageUrlIds[position]);
+			if(bitmapList.get(position)!=null)
+				holder.imageView.setImageBitmap(bitmapList.get(position));
 			
-			return newImageView;
+			return vi;
 		}
+	}
+	
+	static class Holder
+	{
+		TextView textView;
+		ImageView imageView;
 	}
 }
