@@ -213,4 +213,10 @@
 
     <string name="hello_world">Hello world!</string>
 
+    <string name="btnPrev">Previous</string>
+
+    <string name="btnBack">Back</string>
+
+    <string name="btnNext">Next</string>
+
 </resources>
