@@ -3,8 +3,8 @@ package com.example.hw4;
 /*
  * Bradlee Speice, Brandon Rodenmayer
  * ITIS 4180
- * In Class 3
- * PhotoActivity.java
+ * Homework 4
+ * MainActivity.java
  */
  
 import java.net.URL;
@@ -15,12 +15,15 @@ import android.os.Bundle;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.GridView;
@@ -33,19 +36,23 @@ public class MainActivity extends Activity {
 	ProgressDialog progress;
 	LinearLayout root;
 	GridView photoGrid;
-	int[] imageUrlIds = {R.string.uncc_main_image, R.string.football_main_image,
-			R.string.ifest_main_image, R.string.commencement_main_image
-	};
-	int[] imageNames = {R.string.uncc, R.string.sports, R.string.ifest, R.string.commencement};
+	int[] imageUrlIds = {R.string.uncc_main_thumb, R.string.football_main_thumb,
+			R.string.ifest_main_thumb, R.string.commencement_main_thumb
+	}; 
+	int[] imageNames = {R.string.label_uncc, R.string.label_sports, R.string.label_ifest, R.string.label_commencement};
+	int[] thumbNames = {R.array.uncc_thumbs, R.array.football_thumbs, R.array.ifest_thumbs, R.array.commencement_thumbs};
 	ArrayList<Bitmap> bitmapList = new ArrayList<Bitmap>();
 	ArrayList<String> bitmapNames = new ArrayList<String>();
 	int downloadProgress;
+	Intent galleryIntent;
+	ImageAdapter imageAdapter;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		
+		galleryIntent = new Intent(this, GalleryActivity.class);
 		root = (LinearLayout)findViewById(R.id.layout_async);
 		photoGrid = (GridView)findViewById(R.id.grid_async);
 		downloadProgress = 0;
@@ -109,7 +116,20 @@ public class MainActivity extends Activity {
 			{
 				progress.dismiss();
 				//all images are loaded, so set them in the grid
-				photoGrid.setAdapter(new ImageAdapter(photoGrid.getContext()));
+				imageAdapter = new ImageAdapter(photoGrid.getContext());
+				photoGrid.setAdapter(imageAdapter);
+				
+				photoGrid.setOnItemClickListener(new OnItemClickListener()
+				{
+					@Override
+					public void onItemClick(AdapterView<?> parent, View view,
+							int position, long id) 
+					{
+						//Send intent with R.array.label
+						galleryIntent.putExtra("thumbsId", (int)(imageAdapter.getItem(position)));
+						startActivity(galleryIntent);
+					}
+				});
 			}
 		}
 	}
@@ -130,9 +150,9 @@ public class MainActivity extends Activity {
 		}
 
 		@Override
-		public Object getItem(int position)//no purpose. only to fill the requirement of needing the method.
+		public Object getItem(int position)
 		{
-			return position;
+			return thumbNames[position];
 		}
 
 		@Override
