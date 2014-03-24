@@ -1,17 +1,24 @@
 package com.example.hw4;
 
+import java.net.URL;
+
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.view.Menu;
 import android.view.View;
+import android.widget.ImageView;
 
 public class ImageViewerActivity extends Activity {
 	
 	int urlsId;
 	String[] urls;
 	int currentIndex;
+	
+	ProgressDialog dialog;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -22,6 +29,8 @@ public class ImageViewerActivity extends Activity {
 		urlsId = extras.getInt("urls");
 		urls = getResources().getStringArray(urlsId);
 		currentIndex = extras.getInt("index");
+		
+		displayImage(currentIndex);
 	}
 
 	@Override
@@ -44,30 +53,50 @@ public class ImageViewerActivity extends Activity {
 	}
 	
 	private void displayPrev() {
-		currentIndex -= 1;
+		// Wrapping backwards requires more than just modulo
+		if (currentIndex == 0)
+			currentIndex = urls.length - 1;
+		else
+			currentIndex -= 1;
+		
 		displayImage(currentIndex);
 	}
 	
 	private void displayNext() {
-		currentIndex += 1;
+		currentIndex = (currentIndex + 1) % urls.length;
 		displayImage(currentIndex);
 	}
 	
 	public void displayImage(int indexToDisplay) {
-		
-		
+		ImageView view = (ImageView)findViewById(R.id.imgViewer);
+		view.setImageBitmap(null);
+		new ImageDownloader().execute(urls[indexToDisplay]);
+		dialog = new ProgressDialog(this);
+		dialog.setCancelable(false);
+		dialog.show();
 	}
 	
 	private class ImageDownloader extends AsyncTask<String, Void, Bitmap> {
 		@Override
 		protected Bitmap doInBackground(String... params) {
+			try
+			{
+				URL imageUrl = new URL(params[0]);
+				return BitmapFactory.decodeStream(imageUrl.openStream());
+			}
+			catch(Exception e)
+			{
+				e.printStackTrace();
+			}
+			
 			return null;
 		}
 		
 		@Override
 		protected void onPostExecute(Bitmap result) {
-			// TODO Auto-generated method stub
-			super.onPostExecute(result);
+			dialog.cancel();
+			ImageView view = (ImageView)findViewById(R.id.imgViewer);
+			view.setImageBitmap(result);
 		}
 	}
 
