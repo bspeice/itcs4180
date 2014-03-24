@@ -7,6 +7,7 @@
     <uses-sdk
         android:minSdkVersion="11"
         android:targetSdkVersion="16" />
+
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
@@ -26,6 +27,10 @@
         <activity
             android:name="com.example.hw4.GalleryActivity"
             android:label="@string/title_activity_gallery" >
+        </activity>
+        <activity
+            android:name="com.example.hw4.ImageViewerActivity"
+            android:label="@string/title_activity_image_viewer" >
         </activity>
     </application>
 
