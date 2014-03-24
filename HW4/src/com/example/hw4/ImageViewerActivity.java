@@ -32,15 +32,25 @@ public class ImageViewerActivity extends Activity {
 	}
 	
 	public void onClickPrev(View v) {
-		
+		displayPrev();
 	}
 		
 	public void onClickNext(View v) {
-		
+		displayNext();
 	}
 	
 	public void onClickBack(View v) {
 		finish();
+	}
+	
+	private void displayPrev() {
+		currentIndex -= 1;
+		displayImage(currentIndex);
+	}
+	
+	private void displayNext() {
+		currentIndex += 1;
+		displayImage(currentIndex);
 	}
 	
 	public void displayImage(int indexToDisplay) {
