@@ -126,7 +126,7 @@ public class MainActivity extends Activity {
 							int position, long id) 
 					{
 						//Send intent with R.array.label
-						galleryIntent.putExtra("thumbsId", (int)(imageAdapter.getItem(position)));
+						galleryIntent.putExtra("thumbsId", (Integer)(imageAdapter.getItem(position)));
 						startActivity(galleryIntent);
 					}
 				});
