@@ -41,6 +41,7 @@ public class MainActivity extends Activity {
 	}; 
 	int[] imageNames = {R.string.label_uncc, R.string.label_sports, R.string.label_ifest, R.string.label_commencement};
 	int[] thumbNames = {R.array.uncc_thumbs, R.array.football_thumbs, R.array.ifest_thumbs, R.array.commencement_thumbs};
+	int[] photoNames = {R.array.uncc_photos, R.array.football_photos, R.array.ifest_photos, R.array.commencement_photos};
 	ArrayList<Bitmap> bitmapList = new ArrayList<Bitmap>();
 	ArrayList<String> bitmapNames = new ArrayList<String>();
 	int downloadProgress;
@@ -125,8 +126,9 @@ public class MainActivity extends Activity {
 					public void onItemClick(AdapterView<?> parent, View view,
 							int position, long id) 
 					{
-						//Send intent with R.array.label
-						galleryIntent.putExtra("thumbsId", (Integer)(imageAdapter.getItem(position)));
+						//Send intent with thumbs and photos id
+						galleryIntent.putExtra("thumbsId", thumbNames[position]);
+						galleryIntent.putExtra("photosId", photoNames[position]);
 						startActivity(galleryIntent);
 					}
 				});
