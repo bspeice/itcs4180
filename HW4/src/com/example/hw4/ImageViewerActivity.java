@@ -1,5 +1,12 @@
 package com.example.hw4;
 
+/*
+ * Bradlee Speice, Brandon Rodenmayer
+ * ITIS 4180
+ * Homework 4
+ * GalleryActivity.java
+ */
+
 import java.net.URL;
 
 import android.os.AsyncTask;
