@@ -15,7 +15,11 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.util.Log;
+import android.view.GestureDetector.SimpleOnGestureListener;
+import android.view.GestureDetector;
 import android.view.Menu;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
 
@@ -36,6 +40,23 @@ public class ImageViewerActivity extends Activity {
 		urlsId = extras.getInt("urls");
 		urls = getResources().getStringArray(urlsId);
 		currentIndex = extras.getInt("index");
+		
+		// Code modified from below, updated to use non-deprecated parts of API
+		// http://stackoverflow.com/questions/4098198/adding-fling-gesture-to-an-image-view-android
+		final GestureDetector gdt = new GestureDetector(this, new ImageGestures());
+		findViewById(R.id.imgViewer).setOnTouchListener(new View.OnTouchListener() {
+			
+			@Override
+			public boolean onTouch(View arg0, MotionEvent arg1) {
+				// To be honest, reading documentation at:
+				//	http://developer.android.com/reference/android/view/GestureDetector.OnGestureListener.html
+				//	http://developer.android.com/reference/android/view/View.OnTouchListener.html
+				// would lead me to think that we should just return gdt.onTouchEvent(arg1).
+				// However, as someone pointed out on StackOverflow above, they need to be inverted. Going
+				// to ask professor about that tonight.
+				return !gdt.onTouchEvent(arg1);
+			}
+		});
 		
 		displayImage(currentIndex);
 	}
@@ -80,6 +101,7 @@ public class ImageViewerActivity extends Activity {
 		new ImageDownloader().execute(urls[indexToDisplay]);
 		dialog = new ProgressDialog(this);
 		dialog.setCancelable(false);
+		dialog.setMessage("Loading...");
 		dialog.show();
 	}
 	
@@ -106,5 +128,29 @@ public class ImageViewerActivity extends Activity {
 			view.setImageBitmap(result);
 		}
 	}
+	
+	// Gesture detection from:
+	//	https://developer.android.com/training/gestures/detector.html
+	//	http://stackoverflow.com/questions/4098198/adding-fling-gesture-to-an-image-view-android
+	// Please note: Gesture recognition code borrowed heavily from StackOverflow. Because there's so
+	// little actual code, not sure there's any way to re-do this code that won't look like plagiarism.
+	
+	private static final int SWIPE_MIN_DISTANCE = 120;
+    private static final int SWIPE_THRESHOLD_VELOCITY = 200;
+
+    private class ImageGestures extends SimpleOnGestureListener {
+        @Override
+        public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
+            if(e1.getX() - e2.getX() > SWIPE_MIN_DISTANCE && Math.abs(velocityX) > SWIPE_THRESHOLD_VELOCITY) {
+                displayPrev();
+                return true;
+            }  else if (e2.getX() - e1.getX() > SWIPE_MIN_DISTANCE && Math.abs(velocityX) > SWIPE_THRESHOLD_VELOCITY) {
+                displayNext();
+                return true;
+            }
+            
+            return false;
+        }
+    }
 
 }
