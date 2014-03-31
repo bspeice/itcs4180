@@ -19,7 +19,7 @@ class LocationResult(APIView):
 	Show the result for a specific location
 	'''
 	def get(self, request, format=None):
-		l_form = LocationValidator(data=request.data)
+		l_form = LocationValidator(data=request.GET)
 		if l_form.is_valid():
 			location = l_form._instance
 			return Response(location.result)
