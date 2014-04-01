@@ -1,9 +1,0 @@
-<locations>
-	{% for location in locations %}
-	<location>
-		<image>{{ location.image_url }}</image>
-
-		<riddle>{{ location.riddle }}</riddle>
-	</location>
-	{% endfor %}
-</locations>
