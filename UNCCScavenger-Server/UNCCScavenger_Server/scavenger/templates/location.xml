@@ -1,0 +1,5 @@
+<location>
+	<image>{{ image_url }}</image>
+
+	<riddle>{{ riddle }}</riddle>
+</location>
