@@ -31,7 +31,7 @@ public class LocationClient {
 		return client.getResult(keys);
 	}
 	
-	public List<Location> getLocations(Context ctx) {
+	public List<Location> getLocations() {
 		LocationService client = getAdapter();
 		return client.listLocations();
 	}
