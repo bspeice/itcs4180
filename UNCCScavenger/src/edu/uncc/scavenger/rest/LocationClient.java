@@ -11,24 +11,28 @@ import retrofit.RestAdapter;
 
 public class LocationClient {
 	
+	private Context ctx;
 	
+	public LocationClient(Context ctx) {
+		this.ctx = ctx;
+	}
 	
-	public static LocationService getAdapter(Context ctx) {
+	public LocationService getAdapter() {
 		String endpoint = ctx.getString(R.string.endpoint);
 		RestAdapter ra = new RestAdapter.Builder().setEndpoint(endpoint).build();
 		return ra.create(LocationService.class);
 	}
 	
-	public static String validateLocation(Context ctx, int id, String key) {
-		LocationService client = getAdapter(ctx);
+	public String validateLocation(int id, String key) {
+		LocationService client = getAdapter();
 		Map<String, String> keys = new HashMap<String, String>();
 		keys.put("key", key);
 		keys.put("id", String.valueOf(id));
 		return client.getResult(keys);
 	}
 	
-	public static List<Location> getLocations(Context ctx) {
-		LocationService client = getAdapter(ctx);
+	public List<Location> getLocations(Context ctx) {
+		LocationService client = getAdapter();
 		return client.listLocations();
 	}
 }
