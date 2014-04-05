@@ -2,3 +2,6 @@ bin/
 include/
 lib/
 local/
+settings.py
+*.swp
+scavenger.db

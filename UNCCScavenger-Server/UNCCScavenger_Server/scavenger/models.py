@@ -7,6 +7,6 @@ class Location(models.Model):
 	riddle = models.CharField(max_length=512)
 	riddle_image_url = models.URLField()
 
-	location_long = models.DecimalField()
-	location_lat = models.DecimalField()
+	location_long = models.DecimalField(max_digits=10, decimal_places=7)
+	location_lat = models.DecimalField(max_digits=10, decimal_places=7)
 	result = models.TextField()

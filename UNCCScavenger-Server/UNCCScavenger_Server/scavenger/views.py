@@ -12,7 +12,7 @@ class LocationList(APIView):
 	def get(self, request, format=None):
 		locations = Location.objects.all()
 		locations_serializer = LocationListSerializer(locations, many=True)
-		return Response(serializer.data)
+		return Response(locations_serializer.data)
 
 class LocationResult(APIView):
 	'''
