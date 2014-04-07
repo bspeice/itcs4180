@@ -1,7 +1,10 @@
 package edu.uncc.itcs4180.hw5;
 
+import edu.uncc.itcs4180.hw5.twitter.TweetList;
+import edu.uncc.itcs4180.hw5.twitter.TwitterClient;
 import android.os.Bundle;
 import android.app.Activity;
+import android.util.Log;
 import android.view.Menu;
 
 public class MainActivity extends Activity {

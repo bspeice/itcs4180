@@ -5,11 +5,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
-import java.net.URL;
 import java.net.URLEncoder;
-import java.text.BreakIterator;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.concurrent.ExecutionException;
 
 import org.apache.http.HttpEntity;
@@ -22,10 +18,10 @@ import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.params.BasicHttpParams;
 
-import com.google.gson.Gson;
-
 import android.os.AsyncTask;
 import android.util.Base64;
+
+import com.google.gson.Gson;
 
 public class TwitterClient {
 	
@@ -38,10 +34,9 @@ public class TwitterClient {
 	// Code mimicked in large part from:
 	// https://github.com/Rockncoder/TwitterTutorial/blob/master/src/com/example/TwitterTutorial/MainActivity.java
 	
-	public static TweetList getTweetList(String handle) {
-		TwitterClient tc = new TwitterClient();
+	public TweetList getTweetList(String handle) {
 		try {
-			return tc.new TweetListDownloader().execute(handle).get();
+			return new TweetListDownloader().execute(handle).get();
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
