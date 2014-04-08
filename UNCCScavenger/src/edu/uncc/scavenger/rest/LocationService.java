@@ -9,7 +9,7 @@ import retrofit.http.QueryMap;
 public interface LocationService {
 	
 	@GET("/locations")
-	List<Location> listLocations();
+	List<RestLocation> listLocations();
 	
 	@GET("/validate")
 	String getResult(@QueryMap Map<String, String> keys);

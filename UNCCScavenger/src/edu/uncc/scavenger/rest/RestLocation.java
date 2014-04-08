@@ -1,6 +1,8 @@
 package edu.uncc.scavenger.rest;
 
-public class Location {
+import android.location.Location;
+
+public class RestLocation {
 	
 	private int id;
 	private String name;
@@ -39,14 +41,14 @@ public class Location {
 		this.locationLat = locationLat;
 	}
 	
-	private android.location.Location getAndroidLocation() {
+	public Location getLocation() {
 		android.location.Location mLocation = new android.location.Location("NinerFinderServer");
 		mLocation.setLatitude(getLocationLat());
 		mLocation.setLongitude(getLocationLong());
 		return mLocation;
 	}
 	
-	public float bearingTo(Location target) {
-		return getAndroidLocation().bearingTo(target.getAndroidLocation());
+	public float bearingTo(RestLocation target) {
+		return getLocation().bearingTo(target.getLocation());
 	}
 }

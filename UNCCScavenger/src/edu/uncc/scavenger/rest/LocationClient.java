@@ -33,12 +33,12 @@ public class LocationClient {
 		return client.getResult(keys);
 	}
 	
-	public List<Location> getLocations() {
+	public List<RestLocation> getLocations() {
 		try {
 			// Inline AsyncTask
-			return new AsyncTask<Void, Void, List<Location>>() {
+			return new AsyncTask<Void, Void, List<RestLocation>>() {
 				@Override
-				protected List<Location> doInBackground(Void... params) {
+				protected List<RestLocation> doInBackground(Void... params) {
 					// Work happens here
 					return getAdapter().listLocations();
 				}
