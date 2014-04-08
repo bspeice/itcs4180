@@ -39,10 +39,14 @@ public class Location {
 		this.locationLat = locationLat;
 	}
 	
-	public android.location.Location getAndroidLocation() {
+	private android.location.Location getAndroidLocation() {
 		android.location.Location mLocation = new android.location.Location("NinerFinderServer");
 		mLocation.setLatitude(getLocationLat());
 		mLocation.setLongitude(getLocationLong());
 		return mLocation;
+	}
+	
+	public float bearingTo(Location target) {
+		return getAndroidLocation().bearingTo(target.getAndroidLocation());
 	}
 }
