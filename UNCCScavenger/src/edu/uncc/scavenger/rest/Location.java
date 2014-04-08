@@ -38,4 +38,11 @@ public class Location {
 	public void setLocationLat(double locationLat) {
 		this.locationLat = locationLat;
 	}
+	
+	public android.location.Location getAndroidLocation() {
+		android.location.Location mLocation = new android.location.Location("NinerFinderServer");
+		mLocation.setLatitude(getLocationLat());
+		mLocation.setLongitude(getLocationLong());
+		return mLocation;
+	}
 }
