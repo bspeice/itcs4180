@@ -9,6 +9,7 @@ import edu.uncc.itcs4180.hw5.twitter.TweetList;
 import edu.uncc.itcs4180.hw5.twitter.TwitterClient;
 import android.os.Bundle;
 import android.app.Activity;
+import android.content.Intent;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
@@ -46,6 +47,19 @@ public class MainActivity extends Activity {
 		ListView feeds = (ListView)findViewById(R.id.listNewsFeeds);
 		ListAdapter adapter = new ArrayAdapter<String>(this, R.layout.news_site, R.id.txtSiteName, newsSitesTitles);
 		feeds.setAdapter(adapter);
+		feeds.setOnItemClickListener(new OnItemClickListener() {
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view, int position,
+					long id) {
+				String key = ((TextView)view.findViewById(R.id.txtSiteName)).getText().toString();
+				String handle = newsSites.get(key);
+				// Shenanigans to get the parent instance
+				// http://stackoverflow.com/questions/2076037/inside-onclicklistener-i-cannot-access-a-lot-of-things-how-to-approach
+				Intent i = new Intent(MainActivity.this, TweetsListActivity.class);
+				i.putExtra("handle", handle);
+				startActivity(i);
+			}
+		});
 	}
 
 	@Override
@@ -64,16 +78,4 @@ public class MainActivity extends Activity {
 		Toast.makeText(this, "All Saved News are Cleared!", Toast.LENGTH_SHORT).show();
 	}
 	
-	private class FeedListener implements OnItemClickListener {
-
-		@Override
-		public void onItemClick(AdapterView<?> parent, View view, int position,
-				long id) {
-			String key = ((TextView)view.findViewById(R.id.txtSiteName)).getText().toString();
-			String handle = newsSites.get(key);
-			
-		}
-		
-	}
-
 }

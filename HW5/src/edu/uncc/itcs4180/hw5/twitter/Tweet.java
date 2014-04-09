@@ -29,6 +29,9 @@ public class Tweet {
 
 	@SerializedName("user")
 	private TwitterUser user;
+	
+	@SerializedName("retweeted")
+	private boolean retweeted;
 
 	public String getDateCreated() {
 		return dateCreated;
@@ -84,6 +87,14 @@ public class Tweet {
 
 	public TwitterUser getUser() {
 		return user;
+	}
+	
+	public boolean isRetweet() {
+		return retweeted;
+	}
+	
+	public void setRetweet(boolean retweeted) {
+		this.retweeted = retweeted;
 	}
 
 	@Override

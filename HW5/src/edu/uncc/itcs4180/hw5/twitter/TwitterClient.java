@@ -47,7 +47,7 @@ public class TwitterClient {
 		return null;
 	}
 	
-	private class TweetListDownloader extends AsyncTask<String, Void, TweetList> {
+	public class TweetListDownloader extends AsyncTask<String, Void, TweetList> {
 
 		@Override
 		protected TweetList doInBackground(String... params) {

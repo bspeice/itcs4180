@@ -15,6 +15,9 @@ public class TwitterUser {
 
 	@SerializedName("profile_image_url")
 	private String profileImageUrl;
+	
+	@SerializedName("profile_background_image_url")
+	private String profileBackgroundImageUrl;
 
 	public String getProfileImageUrl() {
 		return profileImageUrl;
@@ -38,5 +41,13 @@ public class TwitterUser {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+	
+	public String getProfileBackgroundImageUrl() {
+		return profileBackgroundImageUrl;
+	}
+	
+	public void setProfileBackgroundImageUrl(String profileBackgroundImageUrl) {
+		this.profileBackgroundImageUrl = profileBackgroundImageUrl;
 	}
 }
