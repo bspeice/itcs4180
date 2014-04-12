@@ -28,6 +28,10 @@
             android:name="edu.uncc.itcs4180.hw5.TweetsListActivity"
             android:label="@string/title_activity_tweets_list" >
         </activity>
+        <activity
+            android:name="edu.uncc.itcs4180.hw5.DetailedTweetActivity"
+            android:label="@string/title_activity_detailed_tweet" >
+        </activity>
     </application>
 
 </manifest>

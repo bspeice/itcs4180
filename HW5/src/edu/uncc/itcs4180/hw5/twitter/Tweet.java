@@ -5,9 +5,11 @@ package edu.uncc.itcs4180.hw5.twitter;
 //
 // We changed the field names to conform to Java standards
 
+import java.io.Serializable;
+
 import com.google.gson.annotations.SerializedName;
 
-public class Tweet {
+public class Tweet implements Serializable {
 
 	@SerializedName("created_at")
 	private String dateCreated;
@@ -32,6 +34,28 @@ public class Tweet {
 	
 	@SerializedName("retweeted")
 	private boolean retweeted;
+	
+	@SerializedName("favorite_count")
+	private int favoriteCount;
+	
+	@SerializedName("retweet_count")
+	private int retweetCount;
+	
+	public int getFavoriteCount() {
+		return favoriteCount;
+	}
+
+	public void setFavoriteCount(int favoriteCount) {
+		this.favoriteCount = favoriteCount;
+	}
+
+	public int getRetweetCount() {
+		return retweetCount;
+	}
+
+	public void setRetweetCount(int retweetCount) {
+		this.retweetCount = retweetCount;
+	}
 
 	public String getDateCreated() {
 		return dateCreated;

@@ -3,9 +3,11 @@ package edu.uncc.itcs4180.hw5.twitter;
 // Code copied from:
 // https://github.com/Rockncoder/TwitterTutorial/blob/master/src/com/example/TwitterTutorial/TwitterUser.java
 
+import java.io.Serializable;
+
 import com.google.gson.annotations.SerializedName;
 
-public class TwitterUser {
+public class TwitterUser implements Serializable {
 
 	@SerializedName("screen_name")
 	private String screenName;

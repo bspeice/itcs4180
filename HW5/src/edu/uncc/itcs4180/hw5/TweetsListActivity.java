@@ -7,14 +7,19 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.util.Log;
 import android.view.Menu;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 
 public class TweetsListActivity extends Activity {
 	
-	ProgressDialog dialog;
+	private ProgressDialog dialog;
+	private TweetList list;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -49,10 +54,27 @@ public class TweetsListActivity extends Activity {
 		return true;
 	}
 	
+	public TweetList getTweetList() {
+		return list;
+	}
+	
 	private void displayTweets(TweetList list) {
+		this.list = list;
 		ListView lv = (ListView)findViewById(R.id.listTweetList);
 		ListAdapter la = new TweetListAdapter(this, list.toArray(new Tweet[list.size()]));
 		lv.setAdapter(la);
+		Log.d("ClickListener", "Setting click listener!");
+		lv.setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> adapterView, View view, int pos,
+					long l) {
+				Log.d("ClickListener", "You clicked me!");
+				Intent i = new Intent(TweetsListActivity.this, DetailedTweetActivity.class);
+				i.putExtra("tweet", getTweetList().get(pos));
+				startActivity(i);
+			}
+		});
 	}
 
 }
