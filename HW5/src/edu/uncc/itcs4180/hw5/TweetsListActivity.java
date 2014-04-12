@@ -1,5 +1,6 @@
 package edu.uncc.itcs4180.hw5;
 
+import edu.uncc.itcs4180.hw5.twitter.Tweet;
 import edu.uncc.itcs4180.hw5.twitter.TweetList;
 import edu.uncc.itcs4180.hw5.twitter.TwitterClient;
 import android.os.AsyncTask;
@@ -8,6 +9,8 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.util.Log;
 import android.view.Menu;
+import android.widget.ListAdapter;
+import android.widget.ListView;
 
 public class TweetsListActivity extends Activity {
 	
@@ -47,7 +50,9 @@ public class TweetsListActivity extends Activity {
 	}
 	
 	private void displayTweets(TweetList list) {
-		
+		ListView lv = (ListView)findViewById(R.id.listTweetList);
+		ListAdapter la = new TweetListAdapter(this, list.toArray(new Tweet[list.size()]));
+		lv.setAdapter(la);
 	}
 
 }

@@ -27,6 +27,8 @@ public class TweetListAdapter extends ArrayAdapter<Tweet> {
 	
 	public TweetListAdapter(Activity activity, Tweet[] tweets) {
 		super(activity, R.layout.tweet_list, tweets);
+		this.tweets = tweets;
+		this.activity = activity;
 	}
 	
 	@Override
@@ -47,7 +49,7 @@ public class TweetListAdapter extends ArrayAdapter<Tweet> {
 			tv.ibtnSaveTweet = (ImageButton) rowView.findViewById(R.id.ibtnSaveTweet);
 			
 			rowView.setTag(tv);
-			rowView.setTag(TWEET_TAG_KEY, tweet);
+			rowView.setTag(R.id.TWEET_TAG_KEY, tweet);
 		} else {
 			tv = (TweetView) rowView.getTag();
 		}
