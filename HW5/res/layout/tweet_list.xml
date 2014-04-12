@@ -2,22 +2,25 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/RelativeLayout1"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent" >
+    android:layout_height="fill_parent"
+    android:padding="2dp" >
 
     <ImageView
         android:id="@+id/imgProfileImage"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
+        android:padding="5dp"
         android:src="@drawable/ic_launcher" />
 
     <TextView
         android:id="@+id/txtTweetText"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_toRightOf="@+id/imgProfileImage"
         android:layout_alignParentTop="true"
+        android:layout_toRightOf="@+id/imgProfileImage"
+        android:padding="5dp"
         android:text="TextView" />
 
     <TextView
@@ -27,6 +30,7 @@
         android:layout_alignLeft="@+id/txtTweetText"
         android:layout_below="@+id/txtTweetText"
         android:layout_toLeftOf="@+id/imgIsRetweet"
+        android:padding="5dp"
         android:text="TextView" />
 
     <ImageButton
@@ -36,6 +40,7 @@
         android:layout_alignParentRight="true"
         android:layout_below="@+id/txtTweetText"
         android:onClick="onSaveTweet"
+        android:padding="5dp"
         android:src="@drawable/add_bookmark" />
 
     <ImageView
@@ -44,6 +49,7 @@
         android:layout_height="50dp"
         android:layout_alignTop="@+id/ibtnSaveTweet"
         android:layout_toLeftOf="@+id/ibtnSaveTweet"
+        android:padding="5dp"
         android:src="@drawable/not_retweeted" />
 
 </RelativeLayout>
