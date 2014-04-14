@@ -2,20 +2,18 @@ package edu.uncc.scavenger;
 
 import java.util.List;
 
-import edu.uncc.scavenger.database.LocationDatabaseClient;
-import edu.uncc.scavenger.rest.LocationClient;
-import edu.uncc.scavenger.rest.RestLocation;
-import android.os.Bundle;
 import android.app.Activity;
+import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
-import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+import edu.uncc.scavenger.database.LocationDatabaseClient;
+import edu.uncc.scavenger.rest.LocationClient;
+import edu.uncc.scavenger.rest.RestLocation;
 
 public class MainActivity extends Activity {
 	
@@ -27,9 +25,9 @@ public class MainActivity extends Activity {
 		setContentView(R.layout.activity_main);
 		
 		// Get our list of events loaded
+		locationList = (ListView)findViewById(R.id.listLocations);
 		List<RestLocation> locations = new LocationDatabaseClient().getAllLocations();
 		if (locations != null && locations.size() > 0) {
-			locationList = (ListView)findViewById(R.id.listLocations);
 			LocationAdapter mLocationAdapter = new LocationAdapter(locations);
 			locationList.setAdapter(mLocationAdapter);
 		} else {
@@ -52,7 +50,7 @@ public class MainActivity extends Activity {
 				((TextView)findViewById(R.id.txtNoLocations)).setVisibility(View.GONE);
 				((ListView)findViewById(R.id.listLocations)).setVisibility(View.VISIBLE);
 			}
-		};
+		}.execute();
 	}
 
 	@Override
