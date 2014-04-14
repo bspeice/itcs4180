@@ -48,7 +48,7 @@ public class MainActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		dm = new DataManager(this);
-		dm.saveTweet(new SavedTweet(0, "apple", "Stuff about an apple", "00:00:12", ""));
+		//dm.saveTweet(new SavedTweet(0, "apple", "Stuff about an apple", "00:00:12", ""));
 		
 		// Set up all the news feeds
 		ListView feeds = (ListView)findViewById(R.id.listNewsFeeds);
