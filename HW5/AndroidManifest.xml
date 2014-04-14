@@ -32,6 +32,10 @@
             android:name="edu.uncc.itcs4180.hw5.DetailedTweetActivity"
             android:label="@string/title_activity_detailed_tweet" >
         </activity>
+        <activity
+            android:name="edu.uncc.itcs4180.hw5.SavedNewsActivity"
+            android:label="@string/title_activity_saved_news" >
+        </activity>
     </application>
 
 </manifest>

@@ -3,8 +3,11 @@ package edu.uncc.itcs4180.hw5;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
+import edu.uncc.itcs4180.hw5.database.DataManager;
+import edu.uncc.itcs4180.hw5.database.SavedTweet;
 import edu.uncc.itcs4180.hw5.twitter.TweetList;
 import edu.uncc.itcs4180.hw5.twitter.TwitterClient;
 import android.os.Bundle;
@@ -26,6 +29,8 @@ public class MainActivity extends Activity {
 	
 	private static final Map<String, String> newsSites;
 	private static final String[] newsSitesTitles;
+	private static DataManager dm;
+	
 	static {
 		Map<String, String> mMap = new LinkedHashMap<String, String>();
 		// Put news sites here
@@ -42,6 +47,8 @@ public class MainActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+		dm = new DataManager(this);
+		dm.saveTweet(new SavedTweet(0, "apple", "Stuff about an apple", "00:00:12", ""));
 		
 		// Set up all the news feeds
 		ListView feeds = (ListView)findViewById(R.id.listNewsFeeds);
@@ -70,12 +77,26 @@ public class MainActivity extends Activity {
 	}
 	
 	public void onViewSaved(View v) {
-		
+		SavedTweet t = dm.getTweet(1);
+		if(t!=null)
+		{
+			Intent i = new Intent(MainActivity.this, SavedNewsActivity.class);
+			startActivity(i);
+		}
+		else
+		{
+			Toast.makeText(this, "No saved tweets to view", Toast.LENGTH_SHORT).show();
+		}
 	}
 	
 	public void onClearSaved(View v) {
-		// TODO: Implement the database clearing functionality here.
+		dm.deleteAll();
 		Toast.makeText(this, "All Saved News are Cleared!", Toast.LENGTH_SHORT).show();
 	}
 	
+	protected void onDestroy()
+	{
+		dm.close();
+		super.onDestroy();
+	}
 }

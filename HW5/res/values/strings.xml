@@ -6,5 +6,6 @@
     <string name="hello_world">Hello world!</string>
     <string name="title_activity_tweets_list">TweetsListActivity</string>
     <string name="title_activity_detailed_tweet">DetailedTweetActivity</string>
+    <string name="title_activity_saved_news">SavedNewsActivity</string>
 
 </resources>
