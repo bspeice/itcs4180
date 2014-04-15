@@ -1,5 +1,12 @@
 package edu.uncc.itcs4180.hw5;
 
+/*
+ * Bradlee Speice, Brandon Rodenmayer
+ * ITIS 4180
+ * Homework 5
+ * SavedNewsActivity.java
+ */
+
 import java.util.List;
 
 import edu.uncc.itcs4180.hw5.database.DataManager;

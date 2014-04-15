@@ -1,5 +1,12 @@
 package edu.uncc.itcs4180.hw5.database;
 
+/*
+ * Bradlee Speice, Brandon Rodenmayer
+ * ITIS 4180
+ * Homework 5
+ * SavedTweet.java
+ */
+
 public class SavedTweet 
 {
 	private long id;
@@ -7,6 +14,7 @@ public class SavedTweet
 	private String text;
 	private String time;
 	private String profileImageUrl;
+	private int isRetweet;
 	
 	public SavedTweet()
 	{
@@ -15,15 +23,17 @@ public class SavedTweet
 		this.text = "";
 		this.time = "";
 		this.profileImageUrl = "";
+		this.isRetweet = 0;
 	}
 	
-	public SavedTweet(long id, String username, String text, String time, String profileImageUrl)
+	public SavedTweet(long id, String username, String text, String time, String profileImageUrl, int isRetweet)
 	{
 		this.id= id;
 		this.username = username;
 		this.text = text;
 		this.time = time;
 		this.profileImageUrl = profileImageUrl;
+		this.isRetweet = isRetweet;
 	}
 	
 	public long getId() {
@@ -41,7 +51,14 @@ public class SavedTweet
 	public void setUsername(String username) {
 		this.username = username;
 	}
+	
+	public int getIsRetweet(){
+		return isRetweet;
+	}
 
+	public void setIsRetweet(int isRetweet){
+		this.isRetweet = isRetweet;
+	}
 	public String getText() {
 		return text;
 	}

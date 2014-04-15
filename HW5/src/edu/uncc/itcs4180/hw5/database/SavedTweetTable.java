@@ -1,5 +1,12 @@
 package edu.uncc.itcs4180.hw5.database;
 
+/*
+ * Bradlee Speice, Brandon Rodenmayer
+ * ITIS 4180
+ * Homework 5
+ * SavedTweetTable.java
+ */
+
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 
@@ -11,6 +18,7 @@ public class SavedTweetTable
 	final static String TEXT = "text";
 	final static String TIME = "time";
 	final static String PROFILE_IMAGE_URL = "profileimageurl";
+	final static String IS_RETWEET = "isretweet";
 	
 	public static void onCreate(SQLiteDatabase db)
 	{
@@ -19,7 +27,8 @@ public class SavedTweetTable
 				SavedTweetTable.USER_NAME+ " text not null, "+
 				SavedTweetTable.TEXT+ " text not null, "+
 				SavedTweetTable.TIME+ " text not null, "+
-				SavedTweetTable.PROFILE_IMAGE_URL+ " text not null);";
+				SavedTweetTable.PROFILE_IMAGE_URL+ " text not null, "+
+				SavedTweetTable.IS_RETWEET+" integer not null);";
 		
 		try
 		{

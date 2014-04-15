@@ -1,5 +1,12 @@
 package edu.uncc.itcs4180.hw5.database;
 
+/*
+ * Bradlee Speice, Brandon Rodenmayer
+ * ITIS 4180
+ * Homework 5
+ * DataManager.java
+ */
+
 import java.util.List;
 
 import android.content.Context;

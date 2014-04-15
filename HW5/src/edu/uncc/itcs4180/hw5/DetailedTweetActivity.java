@@ -1,5 +1,12 @@
 package edu.uncc.itcs4180.hw5;
 
+/*
+ * Bradlee Speice, Brandon Rodenmayer
+ * ITIS 4180
+ * Homework 5
+ * DetailedTweetActivity.java
+ */
+
 import edu.uncc.itcs4180.hw5.twitter.Tweet;
 import android.os.Bundle;
 import android.app.Activity;

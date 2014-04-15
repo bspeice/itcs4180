@@ -1,5 +1,12 @@
 package edu.uncc.itcs4180.hw5.database;
 
+/*
+ * Bradlee Speice, Brandon Rodenmayer
+ * ITIS 4180
+ * Homework 5
+ * SavedTweetDAO.java
+ */
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,6 +31,7 @@ public class SavedTweetDAO
 		values.put(SavedTweetTable.TEXT, tweet.getText());
 		values.put(SavedTweetTable.TIME, tweet.getTime());
 		values.put(SavedTweetTable.PROFILE_IMAGE_URL, tweet.getProfileImageUrl());
+		values.put(SavedTweetTable.IS_RETWEET, tweet.getIsRetweet());
 		return db.insert(SavedTweetTable.TABLE_NAME, null, values);
 	}
 	
@@ -34,6 +42,7 @@ public class SavedTweetDAO
 		values.put(SavedTweetTable.TEXT, tweet.getText());
 		values.put(SavedTweetTable.TIME, tweet.getTime());
 		values.put(SavedTweetTable.PROFILE_IMAGE_URL, tweet.getProfileImageUrl());
+		values.put(SavedTweetTable.IS_RETWEET, tweet.getIsRetweet());
 		return db.update(SavedTweetTable.TABLE_NAME, values, SavedTweetTable.ID+"="+tweet.getId(), null)<0;
 	}
 	
@@ -46,7 +55,7 @@ public class SavedTweetDAO
 	{
 		SavedTweet tweet = null;
 		Cursor c = db.query(true, SavedTweetTable.TABLE_NAME,
-				new String[]{SavedTweetTable.ID, SavedTweetTable.USER_NAME, SavedTweetTable.TEXT, SavedTweetTable.TIME, SavedTweetTable.PROFILE_IMAGE_URL},
+				new String[]{SavedTweetTable.ID, SavedTweetTable.USER_NAME, SavedTweetTable.TEXT, SavedTweetTable.TIME, SavedTweetTable.PROFILE_IMAGE_URL, SavedTweetTable.IS_RETWEET},
 				SavedTweetTable.ID+"="+id, null, null, null, null, null);
 		if(c!=null)
 		{
@@ -64,7 +73,7 @@ public class SavedTweetDAO
 	{
 		List<SavedTweet> list = new ArrayList<SavedTweet>();
 		Cursor c = db.query(SavedTweetTable.TABLE_NAME,
-				new String[]{SavedTweetTable.ID, SavedTweetTable.USER_NAME, SavedTweetTable.TEXT, SavedTweetTable.TIME, SavedTweetTable.PROFILE_IMAGE_URL},
+				new String[]{SavedTweetTable.ID, SavedTweetTable.USER_NAME, SavedTweetTable.TEXT, SavedTweetTable.TIME, SavedTweetTable.PROFILE_IMAGE_URL, SavedTweetTable.IS_RETWEET},
 				null, null, null, null, null);
 		if(c!=null)
 		{
@@ -98,6 +107,7 @@ public class SavedTweetDAO
 				tweet.setText(c.getString(2));
 				tweet.setTime(c.getString(3));
 				tweet.setProfileImageUrl(c.getString(4));
+				tweet.setIsRetweet(c.getInt(5));
 			}
 			catch(Exception e)
 			{

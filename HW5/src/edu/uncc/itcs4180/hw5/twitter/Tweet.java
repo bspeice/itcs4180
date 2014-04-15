@@ -1,5 +1,12 @@
 package edu.uncc.itcs4180.hw5.twitter;
 
+/*
+ * Bradlee Speice, Brandon Rodenmayer
+ * ITIS 4180
+ * Homework 5
+ * Tweet.java
+ */
+
 // Code adapted from:
 // https://github.com/Rockncoder/TwitterTutorial/blob/master/src/com/example/TwitterTutorial/Tweet.java
 //

@@ -1,5 +1,12 @@
 package edu.uncc.itcs4180.hw5;
 
+/*
+ * Bradlee Speice, Brandon Rodenmayer
+ * ITIS 4180
+ * Homework 5
+ * SavedNewsAdapter.java
+ */
+
 import edu.uncc.itcs4180.hw5.database.SavedTweet;
 import android.app.Activity;
 import android.view.View;
@@ -29,7 +36,7 @@ public class SavedNewsAdapter extends ArrayAdapter<SavedTweet>
 		
 		if (rowView == null) {
 			// Inflate a new row
-			rowView = activity.getLayoutInflater().inflate(R.layout.tweet_list, null);
+			rowView = activity.getLayoutInflater().inflate(R.layout.saved_tweets_list, null);
 			
 			tv = new TweetView();
 			tv.imgProfileImage = (ImageView) rowView.findViewById(R.id.imgProfileImage);
@@ -48,10 +55,10 @@ public class SavedNewsAdapter extends ArrayAdapter<SavedTweet>
 		new BitmapDownloader(tv.imgProfileImage).execute(tweet.getProfileImageUrl());
 		tv.txtTweetText.setText(tweet.getText());
 		tv.txtTweetInfo.setText(tweet.getTime());
-		// Set the retweet image
-		//if (tweet.isRetweet()) {
+		//Set the retweet image
+		if (tweet.getIsRetweet()==1) {
 			tv.imgIsRetweet.setImageDrawable(activity.getResources().getDrawable(R.drawable.retweeted));
-		//}
+		}
 		
 		return rowView;
 	}

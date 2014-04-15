@@ -1,5 +1,12 @@
 package edu.uncc.itcs4180.hw5.twitter;
 
+/*
+ * Bradlee Speice, Brandon Rodenmayer
+ * ITIS 4180
+ * Homework 5
+ * TwitterClient.java
+ */
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;

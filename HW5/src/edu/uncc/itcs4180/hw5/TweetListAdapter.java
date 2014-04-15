@@ -1,5 +1,12 @@
 package edu.uncc.itcs4180.hw5;
 
+/*
+ * Bradlee Speice, Brandon Rodenmayer
+ * ITIS 4180
+ * Homework 5
+ * TweetListAdapter.java
+ */
+
 import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
@@ -93,6 +100,7 @@ public class TweetListAdapter extends ArrayAdapter<Tweet> {
 		save.setText(t.getText());
 		save.setTime(t.getDateCreated());
 		save.setProfileImageUrl(t.getUser().getProfileImageUrl());
+		save.setIsRetweet((t.isRetweet()) ? 1 : 0);
 		dm.saveTweet(save);
 		Toast.makeText(activity, "Saved in DB!", Toast.LENGTH_SHORT).show();
 	}

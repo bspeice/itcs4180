@@ -1,5 +1,12 @@
 package edu.uncc.itcs4180.hw5;
 
+/*
+ * Bradlee Speice, Brandon Rodenmayer
+ * ITIS 4180
+ * Homework 5
+ * MainActivity.java
+ */
+
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
