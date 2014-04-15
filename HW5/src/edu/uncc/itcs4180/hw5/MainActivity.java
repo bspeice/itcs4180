@@ -54,6 +54,7 @@ public class MainActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+		getActionBar().setTitle("My News Tweets!");
 		dm = new DataManager(this);
 		//dm.saveTweet(new SavedTweet(0, "apple", "Stuff about an apple", "00:00:12", ""));
 		

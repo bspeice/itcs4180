@@ -7,5 +7,9 @@
     <string name="title_activity_tweets_list">TweetsListActivity</string>
     <string name="title_activity_detailed_tweet">DetailedTweetActivity</string>
     <string name="title_activity_saved_news">SavedNewsActivity</string>
+    <string name="view_saved_news_button">View Saved News</string>
+    <string name="clear_saved_news_button">Clear Saved News</string>
+    <string name="default_text">Default</string>
+    <string name="back_button">Back</string>
 
 </resources>

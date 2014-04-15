@@ -22,7 +22,7 @@
         android:layout_alignParentTop="true"
         android:layout_toRightOf="@+id/imgProfileImage"
         android:padding="5dp"
-        android:text="TextView" />
+        android:text="@string/default_text" />
 
     <TextView
         android:id="@+id/txtTweetInfo"
@@ -32,7 +32,7 @@
         android:layout_below="@+id/txtTweetText"
         android:layout_toLeftOf="@+id/imgIsRetweet"
         android:padding="5dp"
-        android:text="TextView" />
+        android:text="@string/default_text" />
 
     <ImageButton
         android:id="@+id/ibtnSaveTweet"

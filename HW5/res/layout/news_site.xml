@@ -10,7 +10,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:padding="15dp"
-        android:text="Large Text"
+        android:text="@string/default_text"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
 </LinearLayout>

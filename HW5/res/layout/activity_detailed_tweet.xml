@@ -1,60 +1,79 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/LinearLayout1"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".DetailedTweetActivity" >
 
-    <TextView
-        android:id="@+id/txtDetailUsername"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:text="TextView" />
+        android:layout_weight="1"
+        android:orientation="vertical" >
 
-    <ImageView
-        android:id="@+id/imgDetailBackground"
-        android:layout_width="wrap_content"
+        <TextView
+            android:id="@+id/txtDetailUsername"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="@string/default_text" />
+
+        <ImageView
+            android:id="@+id/imgDetailBackground"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:padding="5dp"
+            android:scaleType="fitStart" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/txtDetailUsername"
-        android:layout_centerHorizontal="true" />
+        android:orientation="vertical" >
 
-    <TextView
-        android:id="@+id/txtDetailTweet"
-        android:layout_width="wrap_content"
+        <TextView
+            android:id="@+id/txtDetailTweet"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="@string/default_text" />
+
+        <TextView
+            android:id="@+id/txtFavoritesCount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="@string/default_text" />
+
+        <TextView
+            android:id="@+id/txtRetweetCount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="@string/default_text" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/txtDetailUsername"
-        android:layout_below="@+id/imgDetailBackground"
-        android:text="TextView" />
+        android:layout_gravity="bottom"
+        android:orientation="vertical" >
 
-    <Button
-        android:id="@+id/btnDetailBack"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
-        android:onClick="onClickBack"
-        android:text="Button" />
+        <Button
+            android:id="@+id/btnDetailBack"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:onClick="onClickBack"
+            android:text="@string/back_button" />
 
-    <TextView
-        android:id="@+id/txtFavoritesCount"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignRight="@+id/txtDetailTweet"
-        android:layout_below="@+id/txtDetailTweet"
-        android:text="TextView" />
+    </LinearLayout>
 
-    <TextView
-        android:id="@+id/txtRetweetCount"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/txtFavoritesCount"
-        android:layout_below="@+id/txtFavoritesCount"
-        android:text="TextView" />
-
-</RelativeLayout>
+</LinearLayout>
