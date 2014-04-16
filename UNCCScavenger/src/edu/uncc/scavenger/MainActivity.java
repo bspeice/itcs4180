@@ -49,6 +49,9 @@ public class MainActivity extends Activity {
 				// We're back on the main thread at this point, so it's legal.
 				((TextView)findViewById(R.id.txtNoLocations)).setVisibility(View.GONE);
 				((ListView)findViewById(R.id.listLocations)).setVisibility(View.VISIBLE);
+				
+				// And we're even kind enough to update the database
+				LocationDatabaseHelper.getInstance(MainActivity.this).persistAll(result);
 			}
 		}.execute();
 	}
