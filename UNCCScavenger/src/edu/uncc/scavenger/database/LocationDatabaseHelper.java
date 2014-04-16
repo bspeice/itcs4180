@@ -27,7 +27,7 @@ public class LocationDatabaseHelper extends SQLiteOpenHelper {
 	private static final String KEY_RIDDLE = "RIDDLE";
 	private static final String KEY_LOCATION_LONG = "LOCATION_LONG";
 	private static final String KEY_LOCATION_LAT = "LOCATION_LAT";
-	private static final String KEY_KEY = "KEY";
+	private static final String KEY_KEY = "KEYs";
 	
 	private LocationDatabaseHelper(Context ctx) {
 		super(ctx, DATABASE_NAME, null, DATABASE_VERSION);
@@ -46,7 +46,7 @@ public class LocationDatabaseHelper extends SQLiteOpenHelper {
 				KEY_NAME + " VARCHAR(255)," +
 				KEY_RIDDLE + " VARCHAR(1024)," +
 				KEY_LOCATION_LONG + " REAL," +
-				KEY_LOCATION_LAT + " REAL" +
+				KEY_LOCATION_LAT + " REAL," +
 				KEY_KEY + " VARCHAR(255)" +
 				");";
 	@Override
@@ -56,7 +56,7 @@ public class LocationDatabaseHelper extends SQLiteOpenHelper {
 
 	@Override
 	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-		return;
+		db.execSQL("DROP TABLE " + TABLE_NAME + ";");
 	}
 	
 	public RestLocation locationFromCursor(Cursor c) {
