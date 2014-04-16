@@ -11,7 +11,7 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
-import edu.uncc.scavenger.database.LocationDatabaseClient;
+import edu.uncc.scavenger.database.LocationDatabaseHelper;
 import edu.uncc.scavenger.rest.LocationClient;
 import edu.uncc.scavenger.rest.RestLocation;
 
@@ -26,7 +26,7 @@ public class MainActivity extends Activity {
 		
 		// Get our list of events loaded
 		locationList = (ListView)findViewById(R.id.listLocations);
-		List<RestLocation> locations = new LocationDatabaseClient().getAllLocations();
+		List<RestLocation> locations = LocationDatabaseHelper.getInstance(this).fetchAll();
 		if (locations != null && locations.size() > 0) {
 			LocationAdapter mLocationAdapter = new LocationAdapter(locations);
 			locationList.setAdapter(mLocationAdapter);

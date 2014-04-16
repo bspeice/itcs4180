@@ -3,6 +3,7 @@ package edu.uncc.scavenger.database;
 // Design pattern from: http://www.androiddesignpatterns.com/2012/05/correctly-managing-your-sqlite-database.html
 
 import java.util.ArrayList;
+import java.util.List;
 
 import edu.uncc.scavenger.rest.RestLocation;
 import android.content.ContentValues;
@@ -32,7 +33,7 @@ public class LocationDatabaseHelper extends SQLiteOpenHelper {
 		super(ctx, DATABASE_NAME, null, DATABASE_VERSION);
 	}
 	
-	public LocationDatabaseHelper getInstance(Context ctx) {
+	public static LocationDatabaseHelper getInstance(Context ctx) {
 		if (helper == null) {
 			helper = new LocationDatabaseHelper(ctx.getApplicationContext());
 		}
@@ -104,5 +105,9 @@ public class LocationDatabaseHelper extends SQLiteOpenHelper {
 		helper.getWritableDatabase().insert(TABLE_NAME, null, values);
 	}
 	
-	
+	public void persistAll(List<RestLocation> locs) {
+		for (RestLocation l : locs) {
+			persist(l);
+		}
+	}
 }

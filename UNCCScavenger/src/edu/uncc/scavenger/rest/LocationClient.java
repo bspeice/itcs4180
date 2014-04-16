@@ -6,7 +6,7 @@ import java.util.Map;
 import java.util.concurrent.ExecutionException;
 
 import edu.uncc.scavenger.R;
-import edu.uncc.scavenger.database.LocationDatabaseClient;
+import edu.uncc.scavenger.database.LocationDatabaseHelper;
 import android.content.Context;
 import android.os.AsyncTask;
 import retrofit.RestAdapter;
@@ -30,15 +30,15 @@ public class LocationClient {
 
 	public static class LocationsDownloader extends
 			AsyncTask<Void, Void, List<RestLocation>> {
-		LocationService client;
+		Context ctx;
 
 		public LocationsDownloader(Context ctx) {
-			client = getAdapter(ctx);
+			this.ctx = ctx;
 		}
 
 		@Override
 		protected List<RestLocation> doInBackground(Void... arg0) {
-			return client.listLocations();
+			return getAdapter(ctx).listLocations();
 		}
 	}
 
@@ -47,7 +47,7 @@ public class LocationClient {
 		return new LocationsDownloader(ctx) {
 			@Override
 			protected void onPostExecute(List<RestLocation> result) {
-				new LocationDatabaseClient().synchronizeLocations(result);
+				LocationDatabaseHelper.getInstance(ctx).persistAll(result);
 			}
 		}.execute();
 	}
