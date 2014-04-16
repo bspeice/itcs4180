@@ -9,6 +9,7 @@ public class RestLocation {
 	private String riddle;
 	private double locationLong;
 	private double locationLat;
+	private String key;
 	
 	public int getId() {
 		return id;
@@ -40,14 +41,20 @@ public class RestLocation {
 	public void setLocationLat(double locationLat) {
 		this.locationLat = locationLat;
 	}
-	
+	public String getKey() {
+		return key;
+	}
+	public void setKey(String key) {
+		this.key = key;
+	}
+
 	public Location getLocation() {
 		android.location.Location mLocation = new android.location.Location("NinerFinderServer");
 		mLocation.setLatitude(getLocationLat());
 		mLocation.setLongitude(getLocationLong());
 		return mLocation;
 	}
-	
+
 	public float bearingTo(RestLocation target) {
 		return getLocation().bearingTo(target.getLocation());
 	}
