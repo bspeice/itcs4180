@@ -13,6 +13,13 @@
         android:layout_weight="1"
         android:orientation="vertical" >
 
+        <TextView
+            android:id="@+id/locationText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="@string/default_text" />
+
         <ImageView
             android:id="@+id/locationImage"
             android:layout_width="wrap_content"

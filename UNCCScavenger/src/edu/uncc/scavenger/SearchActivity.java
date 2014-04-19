@@ -7,11 +7,18 @@ package edu.uncc.scavenger;
  * SearchActivity.java
  */
 
+import java.net.URL;
+
+import com.example.hw4.ImageViewerActivity.ImageDownloader;
+
 import edu.uncc.scavenger.rest.RestLocation;
 import android.app.Activity;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -27,7 +34,7 @@ public class SearchActivity extends Activity {
 
 	ImageView locationImage;
 	Button compassButton, scanButton;
-	TextView riddleView;
+	TextView locationText, riddleView;
 	Intent intent;
 	RestLocation restLocation;
 	
@@ -36,14 +43,20 @@ public class SearchActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_search);
 		
+		locationText = (TextView)findViewById(R.id.locationText);
 		locationImage = (ImageView)findViewById(R.id.locationImage);
 		compassButton = (Button)findViewById(R.id.compassButton);
 		scanButton = (Button)findViewById(R.id.scanButton);
 		riddleView = (TextView)findViewById(R.id.riddleView);
 		
+		restLocation = (RestLocation)(getIntent().getSerializableExtra("restLocation"));
+		Log.d("restLocation", restLocation.getName());
+		
+		locationText.setText(restLocation.getName());
+		riddleView.setText(restLocation.getRiddle());
+		
 		//TODO
 		//Load picture
-		//Load riddle
 		//Load hints
 		
 		scanButton.setOnClickListener(new OnClickListener(){
@@ -75,8 +88,7 @@ public class SearchActivity extends Activity {
 			}
 		});
 		
-		restLocation = (RestLocation)(getIntent().getSerializableExtra("restLocation"));
-		Log.d("restLocation", restLocation.getName());
+		new ImageDownloader().execute(restLocation.getLocationImageUrl());
 	}
 
 	@Override
@@ -123,4 +135,27 @@ public class SearchActivity extends Activity {
             }
         }
     }
+	
+	private class ImageDownloader extends AsyncTask<String, Void, Bitmap> {
+		@Override
+		protected Bitmap doInBackground(String... params) {
+			try
+			{
+				URL imageUrl = new URL(params[0]);
+				return BitmapFactory.decodeStream(imageUrl.openStream());
+			}
+			catch(Exception e)
+			{
+				e.printStackTrace();
+			}
+			
+			return null;
+		}
+		
+		@Override
+		protected void onPostExecute(Bitmap result) {
+			
+			locationImage.setImageBitmap(result);
+		}
+	}
 }

@@ -12,6 +12,7 @@ import java.util.List;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
@@ -43,6 +44,7 @@ public class MainActivity extends Activity {
 		location.setLocationLong(-80.733734);
 		location.setLocationLat(35.310043);
 		location.setKey("Key");
+		location.setLocationImageUrl("");
 		Intent intent = new Intent(getApplicationContext(), SearchActivity.class);
 		intent.putExtra("restLocation", location);
 		startActivity(intent);
@@ -69,6 +71,7 @@ public class MainActivity extends Activity {
 			// We don't yet have any locations...
 			((TextView)findViewById(R.id.txtNoLocations)).setVisibility(View.VISIBLE);
 			((ListView)findViewById(R.id.listLocations)).setVisibility(View.GONE);
+			Log.d("NoLocation", "NoLocations");
 		}
 		
 		// And kick off contacting to server to see if there are any new ones
