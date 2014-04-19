@@ -1,5 +1,12 @@
 package edu.uncc.scavenger.rest;
 
+/*
+ * Bradlee Speice, Brandon Rodenmayer
+ * ITIS 4180
+ * UNCCScavenger (NinerFinder)
+ * LocationService.java
+ */
+
 import java.util.List;
 import java.util.Map;
 

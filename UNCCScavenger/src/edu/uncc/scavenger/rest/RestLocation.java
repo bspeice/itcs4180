@@ -1,8 +1,17 @@
 package edu.uncc.scavenger.rest;
 
+/*
+ * Bradlee Speice, Brandon Rodenmayer
+ * ITIS 4180
+ * UNCCScavenger (NinerFinder)
+ * RestLocation.java
+ */
+
+import java.io.Serializable;
+
 import android.location.Location;
 
-public class RestLocation {
+public class RestLocation implements Serializable{
 	
 	private int id;
 	private String name;

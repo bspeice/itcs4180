@@ -1,12 +1,22 @@
 package edu.uncc.scavenger;
 
+/*
+ * Bradlee Speice, Brandon Rodenmayer
+ * ITIS 4180
+ * UNCCScavenger (NinerFinder)
+ * MainActivity.java
+ */
+
 import java.util.List;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -18,18 +28,43 @@ import edu.uncc.scavenger.rest.RestLocation;
 public class MainActivity extends Activity {
 	
 	ListView locationList;
+	List<RestLocation> locations;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		
+		/*Test Code
+		RestLocation location = new RestLocation();
+		location.setId(1);
+		location.setName("Bridge");
+		location.setRiddle("Riddle");
+		location.setLocationLong(-80.733734);
+		location.setLocationLat(35.310043);
+		location.setKey("Key");
+		Intent intent = new Intent(getApplicationContext(), SearchActivity.class);
+		intent.putExtra("restLocation", location);
+		startActivity(intent);
+		finish();
+		/*End Test Code*/
+		
 		// Get our list of events loaded
 		locationList = (ListView)findViewById(R.id.listLocations);
-		List<RestLocation> locations = LocationDatabaseHelper.getInstance(this).fetchAll();
+		locations = LocationDatabaseHelper.getInstance(this).fetchAll();
 		if (locations != null && locations.size() > 0) {
 			LocationAdapter mLocationAdapter = new LocationAdapter(locations);
 			locationList.setAdapter(mLocationAdapter);
+			locationList.setOnItemClickListener(new OnItemClickListener(){
+
+				@Override
+				public void onItemClick(AdapterView<?> parent, View view,
+						int position, long id) {
+					Intent intent = new Intent(getApplicationContext(), SearchActivity.class);
+					intent.putExtra("restLocation", locations.get(position));
+					startActivity(intent);
+				}
+			});
 		} else {
 			// We don't yet have any locations...
 			((TextView)findViewById(R.id.txtNoLocations)).setVisibility(View.VISIBLE);
@@ -54,6 +89,7 @@ public class MainActivity extends Activity {
 				LocationDatabaseHelper.getInstance(MainActivity.this).persistAll(result);
 			}
 		}.execute();
+		
 	}
 
 	@Override

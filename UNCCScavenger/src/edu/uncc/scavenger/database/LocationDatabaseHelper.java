@@ -1,5 +1,12 @@
 package edu.uncc.scavenger.database;
 
+/*
+ * Bradlee Speice, Brandon Rodenmayer
+ * ITIS 4180
+ * UNCCScavenger (NinerFinder)
+ * LocationDatabaseHelper.java
+ */
+
 // Design pattern from: http://www.androiddesignpatterns.com/2012/05/correctly-managing-your-sqlite-database.html
 
 import java.util.ArrayList;
