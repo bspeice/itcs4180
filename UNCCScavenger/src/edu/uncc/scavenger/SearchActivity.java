@@ -9,14 +9,16 @@ package edu.uncc.scavenger;
 
 import java.net.URL;
 
-import com.example.hw4.ImageViewerActivity.ImageDownloader;
-
 import edu.uncc.scavenger.rest.RestLocation;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.ActivityNotFoundException;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.location.LocationManager;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -55,10 +57,6 @@ public class SearchActivity extends Activity {
 		locationText.setText(restLocation.getName());
 		riddleView.setText(restLocation.getRiddle());
 		
-		//TODO
-		//Load picture
-		//Load hints
-		
 		scanButton.setOnClickListener(new OnClickListener(){
 
 			@Override
@@ -70,10 +68,28 @@ public class SearchActivity extends Activity {
 					startActivityForResult(intent, 0);
 				}
 				catch(ActivityNotFoundException e){
-					//Does not work on an emulator because there is no access to the market
-					Uri marketUri = Uri.parse("market://details?id=com.google.zxing.client.android");
-					Intent marketIntent = new Intent(Intent.ACTION_VIEW, marketUri);
-					startActivity(marketIntent);
+					
+					AlertDialog.Builder builder = new AlertDialog.Builder(SearchActivity.this);
+					builder.setMessage(getString(R.string.zxing_missing_message));
+					builder.setPositiveButton(getString(R.string.dialog_ok_text), new DialogInterface.OnClickListener(){
+
+						@Override
+						public void onClick(DialogInterface dialog, int which) {
+							//Does not work on an emulator because there is no access to the market
+							Uri marketUri = Uri.parse(getString(R.string.zxing_market_uri));
+							Intent marketIntent = new Intent(Intent.ACTION_VIEW, marketUri);
+							startActivity(marketIntent);
+						}
+					});
+					builder.setNegativeButton(getString(R.string.dialog_cancel_text), new DialogInterface.OnClickListener(){
+
+						@Override
+						public void onClick(DialogInterface dialog, int which) {
+							dialog.cancel();	
+						}
+					});
+					AlertDialog alert = builder.create();
+					alert.show();
 				}
 			}
 		});
@@ -81,14 +97,42 @@ public class SearchActivity extends Activity {
 
 			@Override
 			public void onClick(View v) {
-				intent = new Intent(getApplicationContext(), CompassActivity.class);
-				intent.putExtra("searchLat", restLocation.getLocationLat());
-				intent.putExtra("searchLong", restLocation.getLocationLong());
-				startActivity(intent);
+				LocationManager lm = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
+				
+				if(lm.isProviderEnabled(LocationManager.GPS_PROVIDER))
+				{
+					intent = new Intent(getApplicationContext(), CompassActivity.class);
+					intent.putExtra("searchLat", restLocation.getLocationLat());
+					intent.putExtra("searchLong", restLocation.getLocationLong());
+					startActivity(intent);
+				}
+				else
+				{
+					AlertDialog.Builder builder = new AlertDialog.Builder(SearchActivity.this);
+					builder.setMessage(getString(R.string.gps_disabled_message));
+					builder.setPositiveButton(getString(R.string.dialog_ok_text), new DialogInterface.OnClickListener(){
+
+						@Override
+						public void onClick(DialogInterface dialog, int which) {
+							Intent intent = new Intent(android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+							startActivity(intent);
+						}
+					});
+					builder.setNegativeButton(getString(R.string.dialog_cancel_text), new DialogInterface.OnClickListener(){
+
+						@Override
+						public void onClick(DialogInterface dialog, int which) {
+							dialog.cancel();	
+						}
+					});
+					AlertDialog alert = builder.create();
+					alert.show();
+				}
 			}
 		});
 		
-		new ImageDownloader().execute(restLocation.getLocationImageUrl());
+		//Toast.makeText(getApplicationContext(), restLocation.getLocationImageURL(), Toast.LENGTH_SHORT).show();
+		new ImageDownloader().execute(restLocation.getLocationImageURL());
 	}
 
 	@Override
@@ -126,7 +170,7 @@ public class SearchActivity extends Activity {
                 }
                 else
                 {
-                	Toast.makeText(getApplicationContext(), "Incorrect url found: "+contents, Toast.LENGTH_SHORT).show();
+                	Toast.makeText(getApplicationContext(), "Incorrect place found: "+contents, Toast.LENGTH_SHORT).show();
                 }
             } 
             else if (resultCode == RESULT_CANCELED) 
@@ -155,7 +199,10 @@ public class SearchActivity extends Activity {
 		@Override
 		protected void onPostExecute(Bitmap result) {
 			
-			locationImage.setImageBitmap(result);
+			if(result!=null)
+			{
+				locationImage.setImageBitmap(result);
+			}
 		}
 	}
 }

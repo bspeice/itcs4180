@@ -15,5 +15,10 @@
     <string name="found_text">Location Found!</string>
     <string name="see_more_text">More Location Information</string>
     <string name="try_more_button">Try Another Location</string>
+    <string name="gps_disabled_message">GPS must be enabled to use the compass.Would you like to enable it now?</string>
+    <string name="zxing_missing_message">zxing Barcode Scanner must be installed to scan QR codes. Would you like to install it now?</string>
+    <string name="zxing_market_uri">market://details?id=com.google.zxing.client.android</string>
+    <string name="dialog_ok_text">OK</string>
+    <string name="dialog_cancel_text">Cancel</string>
 
 </resources>
