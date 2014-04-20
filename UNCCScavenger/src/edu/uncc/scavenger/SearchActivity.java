@@ -138,7 +138,7 @@ public class SearchActivity extends Activity {
 		}
 		else
 		{
-			new ImageDownloader().execute(restLocation.getLocationImageURL());
+			new ImageDownloader().execute(restLocation.getRiddleImageURL());
 		}
 	}
 

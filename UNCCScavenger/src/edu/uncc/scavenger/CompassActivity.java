@@ -74,8 +74,8 @@ public class CompassActivity extends Activity implements SensorEventListener
 		searchLocation.setLongitude(-80.733734);*/
 		
 		searchLocation = new Location(LocationManager.NETWORK_PROVIDER);
-		searchLocation.setLatitude(restLocation.getLocationLat()); 
-		searchLocation.setLongitude(restLocation.getLocationLong());
+		searchLocation.setLatitude((float)(restLocation.getLocationLat())); 
+		searchLocation.setLongitude((float)(restLocation.getLocationLong()));
 		
 		locationManager = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
 		locationListener = new DirectionListener(searchLocation);
