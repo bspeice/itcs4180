@@ -102,8 +102,7 @@ public class SearchActivity extends Activity {
 				if(lm.isProviderEnabled(LocationManager.GPS_PROVIDER))
 				{
 					intent = new Intent(getApplicationContext(), CompassActivity.class);
-					intent.putExtra("searchLat", restLocation.getLocationLat());
-					intent.putExtra("searchLong", restLocation.getLocationLong());
+					intent.putExtra("restLocation", restLocation);
 					startActivity(intent);
 				}
 				else
@@ -132,7 +131,15 @@ public class SearchActivity extends Activity {
 		});
 		
 		//Toast.makeText(getApplicationContext(), restLocation.getLocationImageURL(), Toast.LENGTH_SHORT).show();
-		new ImageDownloader().execute(restLocation.getLocationImageURL());
+		Bitmap locationPicture = BitmapAccess.loadBitmap(getApplicationContext(), restLocation.getName());
+		if(locationPicture != null)
+		{
+			locationImage.setImageBitmap(locationPicture);
+		}
+		else
+		{
+			new ImageDownloader().execute(restLocation.getLocationImageURL());
+		}
 	}
 
 	@Override
@@ -202,6 +209,7 @@ public class SearchActivity extends Activity {
 			if(result!=null)
 			{
 				locationImage.setImageBitmap(result);
+				BitmapAccess.saveBitmap(getApplicationContext(), result, restLocation.getName());
 			}
 		}
 	}

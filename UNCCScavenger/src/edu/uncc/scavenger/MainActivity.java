@@ -22,6 +22,7 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 import edu.uncc.scavenger.database.LocationDatabaseHelper;
 import edu.uncc.scavenger.rest.LocationClient;
 import edu.uncc.scavenger.rest.RestLocation;
@@ -36,7 +37,7 @@ public class MainActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		
-		/*Test Code
+		/*Test Code for mock location
 		RestLocation location = new RestLocation();
 		location.setId(1);
 		location.setName("Bridge");
@@ -93,6 +94,7 @@ public class MainActivity extends Activity {
 			}
 		}.execute();
 		
+		//Toast.makeText(getApplicationContext(), ""+locations.get(0).getLocationImageURL(), Toast.LENGTH_SHORT).show();
 	}
 
 	@Override

@@ -11,8 +11,10 @@ package edu.uncc.scavenger;
  * stackoverflow.com/questions/5479753/using-orientation-sensor-to-point-towards-a-specific-location
  */
 
+import edu.uncc.scavenger.rest.RestLocation;
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
@@ -26,10 +28,12 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 public class CompassActivity extends Activity implements SensorEventListener
 {
-	ImageView compass, arrowView;
+	final int SEARCH_PROXIMITY = 10;
+	ImageView compassRoseView, arrowView, searchImageView;
 	Button backButton;
 	SensorManager sManager;
 	Sensor aSensor, mSensor;
@@ -43,25 +47,35 @@ public class CompassActivity extends Activity implements SensorEventListener
 	LocationManager locationManager;
 	DirectionListener locationListener;
 	Location searchLocation;
-	Location testLocation = new Location(LocationManager.NETWORK_PROVIDER);
+	RestLocation restLocation;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_compass);
 
+		restLocation = (RestLocation)(getIntent().getSerializableExtra("restLocation"));
+		
 		arrowView = (ImageView)findViewById(R.id.arrowView);
-		compass = (ImageView)findViewById(R.id.compassRose);
+		compassRoseView = (ImageView)findViewById(R.id.compassRoseView);
+		searchImageView = (ImageView)findViewById(R.id.searchImageView);
+		searchImageView.setVisibility(View.INVISIBLE);
+		Bitmap b = BitmapAccess.loadBitmap(getApplicationContext(), restLocation.getName());
+		if(b != null)
+		{
+			searchImageView.setImageBitmap(b);
+		}
 		
 		/*Test Values 
-		testLocation.setLatitude(35.30719258);//woodward eagle
-		testLocation.setLongitude(-80.73505447);
-		testLocation.setLatitude(35.310043);//Bottom of Student Union bridge
-		testLocation.setLongitude(-80.733734);*/
+		searchLocation.setLatitude(35.30719258);//woodward eagle
+		searchLocation.setLongitude(-80.73505447);
+		searchLocation = new Location(LocationManager.NETWORK_PROVIDER);
+		searchLocation.setLatitude(35.310043);//Bottom of Student Union bridge
+		searchLocation.setLongitude(-80.733734);*/
 		
 		searchLocation = new Location(LocationManager.NETWORK_PROVIDER);
-		searchLocation.setLatitude(getIntent().getDoubleExtra("searchLat", 0)); 
-		searchLocation.setLongitude(getIntent().getDoubleExtra("searchLong", 0));
+		searchLocation.setLatitude(restLocation.getLocationLat()); 
+		searchLocation.setLongitude(restLocation.getLocationLong());
 		
 		locationManager = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
 		locationListener = new DirectionListener(searchLocation);
@@ -79,6 +93,8 @@ public class CompassActivity extends Activity implements SensorEventListener
 				finish();
 			}
 		});
+		
+		Toast.makeText(getApplicationContext(), ""+searchLocation.getLatitude()+", "+searchLocation.getLongitude(), Toast.LENGTH_SHORT).show();
 	}
 
 	@Override
@@ -146,11 +162,21 @@ public class CompassActivity extends Activity implements SensorEventListener
 		float rotateArrow = (float) (trueHeading - locationListener.getBearing());
 		
 		//Rotate compass and arrow. Rotations must be opposite to counteract device movement
-		compass.setRotation((long)(-1 * trueHeading));
+		compassRoseView.setRotation((long)(-1 * trueHeading));
 		arrowView.setRotation((long)(-1 * rotateArrow));
 		
-		//TODO
-		//If within 5 to 10 meters, display image of search
+		if(locationListener.getDistance() < SEARCH_PROXIMITY)
+		{
+			arrowView.setVisibility(View.INVISIBLE);
+			compassRoseView.setVisibility(View.INVISIBLE);
+			searchImageView.setVisibility(View.VISIBLE);
+		}
+		else
+		{
+			arrowView.setVisibility(View.VISIBLE);
+			compassRoseView.setVisibility(View.VISIBLE);
+			searchImageView.setVisibility(View.INVISIBLE);
+		}
 	}
 
 	@Override
