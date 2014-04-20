@@ -18,7 +18,7 @@ public class RestLocation implements Serializable{
 	private String riddle;
 	private double locationLong;
 	private double locationLat;
-	private String locationImageURL;
+	private String riddleImageURL;
 	private String key;
 	
 	public int getId() {
@@ -57,13 +57,13 @@ public class RestLocation implements Serializable{
 	public void setKey(String key) {
 		this.key = key;
 	}
-
-	public String getLocationImageURL() {
-		return locationImageURL;
+	public String getRiddleImageURL() {
+		return riddleImageURL;
 	}
-	public void setLocationImageURL(String locationImageURL) {
-		this.locationImageURL = locationImageURL;
+	public void setRiddleImageURL(String riddleImageURL) {
+		this.riddleImageURL = riddleImageURL;
 	}
+	
 	public Location getLocation() {
 		android.location.Location mLocation = new android.location.Location("NinerFinderServer");
 		mLocation.setLatitude(getLocationLat());
