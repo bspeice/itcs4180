@@ -46,7 +46,7 @@ public class FoundActivity extends Activity {
 
 			@Override
 			public void onClick(View v) {
-				intent = new Intent(getApplicationContext(), MainActivity.class);
+				intent = new Intent(FoundActivity.this, MainActivity.class);
 				startActivity(intent);
 				finish();
 			}

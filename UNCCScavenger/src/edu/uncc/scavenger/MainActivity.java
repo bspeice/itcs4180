@@ -64,7 +64,7 @@ public class MainActivity extends Activity {
 				
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view,int position, long id) {
-				Intent intent = new Intent(getApplicationContext(), SearchActivity.class);
+				Intent intent = new Intent(MainActivity.this, SearchActivity.class);
 				intent.putExtra("restLocation", locations.get(position));
 				startActivity(intent);
 				}
@@ -94,6 +94,7 @@ public class MainActivity extends Activity {
 				
 				// And we're even kind enough to update the database
 				LocationDatabaseHelper.getInstance(MainActivity.this).persistAll(result);
+				locations = LocationDatabaseHelper.getInstance(getBaseContext()).fetchAll();
 			}
 		}.execute();
 		

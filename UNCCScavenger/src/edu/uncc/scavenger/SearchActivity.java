@@ -101,7 +101,7 @@ public class SearchActivity extends Activity {
 				
 				if(lm.isProviderEnabled(LocationManager.GPS_PROVIDER))
 				{
-					intent = new Intent(getApplicationContext(), CompassActivity.class);
+					intent = new Intent(SearchActivity.this, CompassActivity.class);
 					intent.putExtra("restLocation", restLocation);
 					startActivity(intent);
 				}
@@ -131,7 +131,7 @@ public class SearchActivity extends Activity {
 		});
 		
 		Toast.makeText(getApplicationContext(), restLocation.getRiddleImageUrl(), Toast.LENGTH_SHORT).show();
-		Bitmap locationPicture = BitmapAccess.loadBitmap(getApplicationContext(), restLocation.getName());
+		Bitmap locationPicture = BitmapAccess.loadBitmap(this, restLocation.getName());
 		if(locationPicture != null)
 		{
 			locationImage.setImageBitmap(locationPicture);
@@ -171,18 +171,18 @@ public class SearchActivity extends Activity {
             	String contents = data.getStringExtra("SCAN_RESULT"); 
                 if(contents.equals(restLocation.getName()))
                 {
-                	intent = new Intent(getApplicationContext(), FoundActivity.class);
+                	intent = new Intent(SearchActivity.this, FoundActivity.class);
                 	startActivity(intent);
                 	finish();
                 }
                 else
                 {
-                	Toast.makeText(getApplicationContext(), "Incorrect place found: "+contents, Toast.LENGTH_SHORT).show();
+                	Toast.makeText(SearchActivity.this, "Incorrect place found: "+contents, Toast.LENGTH_SHORT).show();
                 }
             } 
             else if (resultCode == RESULT_CANCELED) 
             {
-            	Toast.makeText(getApplicationContext(), "Error scanning code", Toast.LENGTH_SHORT).show();
+            	Toast.makeText(SearchActivity.this, "Error scanning code", Toast.LENGTH_SHORT).show();
             }
         }
     }
@@ -209,7 +209,7 @@ public class SearchActivity extends Activity {
 			if(result!=null)
 			{
 				locationImage.setImageBitmap(result);
-				BitmapAccess.saveBitmap(getApplicationContext(), result, restLocation.getName());
+				BitmapAccess.saveBitmap(SearchActivity.this, result, restLocation.getName());
 			}
 		}
 	}

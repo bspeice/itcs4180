@@ -60,7 +60,7 @@ public class CompassActivity extends Activity implements SensorEventListener
 		compassRoseView = (ImageView)findViewById(R.id.compassRoseView);
 		searchImageView = (ImageView)findViewById(R.id.searchImageView);
 		searchImageView.setVisibility(View.INVISIBLE);
-		Bitmap b = BitmapAccess.loadBitmap(getApplicationContext(), restLocation.getName());
+		Bitmap b = BitmapAccess.loadBitmap(this, restLocation.getName());
 		if(b != null)
 		{
 			searchImageView.setImageBitmap(b);
@@ -94,7 +94,7 @@ public class CompassActivity extends Activity implements SensorEventListener
 			}
 		});
 		
-		Toast.makeText(getApplicationContext(), ""+searchLocation.getLatitude()+", "+searchLocation.getLongitude(), Toast.LENGTH_SHORT).show();
+		Toast.makeText(this, ""+searchLocation.getLatitude()+", "+searchLocation.getLongitude(), Toast.LENGTH_SHORT).show();
 	}
 
 	@Override
