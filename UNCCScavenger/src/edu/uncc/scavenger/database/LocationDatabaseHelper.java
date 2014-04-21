@@ -78,6 +78,7 @@ public class LocationDatabaseHelper extends SQLiteOpenHelper {
 			location.setLocationLong(c.getDouble(3));
 			location.setLocationLat(c.getDouble(4));
 			location.setKey(c.getString(5));
+			location.setRiddleImageUrl(c.getString(6));
 		}
 		
 		return location;
