@@ -34,7 +34,8 @@ public class LocationDatabaseHelper extends SQLiteOpenHelper {
 	private static final String KEY_RIDDLE = "RIDDLE";
 	private static final String KEY_LOCATION_LONG = "LOCATION_LONG";
 	private static final String KEY_LOCATION_LAT = "LOCATION_LAT";
-	private static final String KEY_KEY = "KEYs";
+	private static final String KEY_VALIDATION_KEY = "VALIDATION_KEY";
+	private static final String KEY_RIDDLE_IMAGE_URL = "RIDDLE_IMAGE_URL";
 	
 	private LocationDatabaseHelper(Context ctx) {
 		super(ctx, DATABASE_NAME, null, DATABASE_VERSION);
@@ -54,7 +55,8 @@ public class LocationDatabaseHelper extends SQLiteOpenHelper {
 				KEY_RIDDLE + " VARCHAR(1024)," +
 				KEY_LOCATION_LONG + " REAL," +
 				KEY_LOCATION_LAT + " REAL," +
-				KEY_KEY + " VARCHAR(255)" +
+				KEY_VALIDATION_KEY + " VARCHAR(255)," +
+				KEY_RIDDLE_IMAGE_URL + " VARCHAR(255)" +
 				");";
 	@Override
 	public void onCreate(SQLiteDatabase db) {
@@ -85,7 +87,7 @@ public class LocationDatabaseHelper extends SQLiteOpenHelper {
 		ArrayList<RestLocation> results = new ArrayList<RestLocation>();
 		SQLiteDatabase db = helper.getReadableDatabase();
 		Cursor c = db.query(TABLE_NAME, new String[]{KEY_ID, KEY_NAME, KEY_RIDDLE, KEY_LOCATION_LONG,
-											KEY_LOCATION_LAT, KEY_KEY},
+											KEY_LOCATION_LAT, KEY_VALIDATION_KEY, KEY_RIDDLE_IMAGE_URL},
 				null, null, null, null, null);
 		
 		if (c != null && c.getCount() > 0) {
@@ -108,8 +110,9 @@ public class LocationDatabaseHelper extends SQLiteOpenHelper {
 		values.put(KEY_RIDDLE, loc.getRiddle());
 		values.put(KEY_LOCATION_LONG, loc.getLocationLong());
 		values.put(KEY_LOCATION_LAT, loc.getLocationLat());
-		values.put(KEY_KEY, loc.getKey());
-		helper.getWritableDatabase().insert(TABLE_NAME, null, values);
+		values.put(KEY_VALIDATION_KEY, loc.getKey());
+		values.put(KEY_RIDDLE_IMAGE_URL, loc.getRiddleImageUrl());
+		helper.getWritableDatabase().insertWithOnConflict(TABLE_NAME, null, values, SQLiteDatabase.CONFLICT_REPLACE);
 	}
 	
 	public void persistAll(List<RestLocation> locs) {

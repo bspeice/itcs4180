@@ -78,6 +78,7 @@ public class MainActivity extends Activity {
 		 }
  		
 		// And kick off contacting to server to see if there are any new ones
+		locationList = (ListView)findViewById(R.id.listLocations);
 		new LocationClient.LocationsDownloader(this) {
 			@Override
 			protected void onPostExecute(List<RestLocation> result) {
