@@ -97,7 +97,7 @@ public class MainActivity extends Activity {
 			}
 		}.execute();
 		
-		//Toast.makeText(getApplicationContext(), ""+locations.get(0).getRiddleImageURL(), Toast.LENGTH_SHORT).show();
+		//Toast.makeText(getApplicationContext(), ""+locations.get(0).getRiddleImageUrl(), Toast.LENGTH_SHORT).show();
 	}
 
 	@Override

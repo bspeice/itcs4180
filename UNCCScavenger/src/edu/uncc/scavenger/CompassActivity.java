@@ -165,7 +165,7 @@ public class CompassActivity extends Activity implements SensorEventListener
 		compassRoseView.setRotation((long)(-1 * trueHeading));
 		arrowView.setRotation((long)(-1 * rotateArrow));
 		
-		if(locationListener.getDistance() < SEARCH_PROXIMITY)
+		if(locationListener.getDistance() <= SEARCH_PROXIMITY)
 		{
 			arrowView.setVisibility(View.INVISIBLE);
 			compassRoseView.setVisibility(View.INVISIBLE);

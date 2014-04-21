@@ -130,7 +130,7 @@ public class SearchActivity extends Activity {
 			}
 		});
 		
-		//Toast.makeText(getApplicationContext(), restLocation.getLocationImageURL(), Toast.LENGTH_SHORT).show();
+		Toast.makeText(getApplicationContext(), restLocation.getRiddleImageUrl(), Toast.LENGTH_SHORT).show();
 		Bitmap locationPicture = BitmapAccess.loadBitmap(getApplicationContext(), restLocation.getName());
 		if(locationPicture != null)
 		{
