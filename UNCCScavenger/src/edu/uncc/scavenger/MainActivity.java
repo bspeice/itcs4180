@@ -45,35 +45,12 @@ public class MainActivity extends Activity {
 		location.setLocationLong(-80.733734);
 		location.setLocationLat(35.310043);
 		location.setKey("Key");
-		location.setLocationImageUrl("");
+		location.setRiddleImageURL("http://rmss.uncc.edu/sites/rmss.uncc.edu/files/media/Belk%20Tower.jpg");
 		Intent intent = new Intent(getApplicationContext(), SearchActivity.class);
 		intent.putExtra("restLocation", location);
 		startActivity(intent);
 		finish();
 		/*End Test Code*/
-		
-		// Get our list of events loaded
-		locationList = (ListView)findViewById(R.id.listLocations);
-		locations = LocationDatabaseHelper.getInstance(this).fetchAll();
-		if (locations != null && locations.size() > 0) {
-			LocationAdapter mLocationAdapter = new LocationAdapter(locations);
-			locationList.setAdapter(mLocationAdapter);
-			locationList.setOnItemClickListener(new OnItemClickListener(){
-
-				@Override
-				public void onItemClick(AdapterView<?> parent, View view,
-						int position, long id) {
-					Intent intent = new Intent(getApplicationContext(), SearchActivity.class);
-					intent.putExtra("restLocation", locations.get(position));
-					startActivity(intent);
-				}
-			});
-		} else {
-			// We don't yet have any locations...
-			((TextView)findViewById(R.id.txtNoLocations)).setVisibility(View.VISIBLE);
-			((ListView)findViewById(R.id.listLocations)).setVisibility(View.GONE);
-			Log.d("NoLocation", "NoLocations");
-		}
 		
 		// And kick off contacting to server to see if there are any new ones
 		new LocationClient.LocationsDownloader(this) {
@@ -94,7 +71,7 @@ public class MainActivity extends Activity {
 			}
 		}.execute();
 		
-		Toast.makeText(getApplicationContext(), ""+locations.get(0).getRiddleImageURL(), Toast.LENGTH_SHORT).show();
+		//Toast.makeText(getApplicationContext(), ""+locations.get(0).getRiddleImageURL(), Toast.LENGTH_SHORT).show();
 	}
 
 	@Override
