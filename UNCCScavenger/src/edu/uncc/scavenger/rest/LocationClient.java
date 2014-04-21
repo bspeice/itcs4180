@@ -11,7 +11,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.google.gson.FieldNamingPolicy;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
 import retrofit.RestAdapter;
+import retrofit.converter.GsonConverter;
 import android.content.Context;
 import android.os.AsyncTask;
 import edu.uncc.scavenger.R;
@@ -20,7 +25,10 @@ public class LocationClient {
 
 	private static LocationService getAdapter(Context ctx) {
 		String endpoint = ctx.getString(R.string.endpoint);
+		Gson gson = new GsonBuilder().setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
+				.create();
 		RestAdapter ra = new RestAdapter.Builder().setEndpoint(endpoint)
+				.setConverter(new GsonConverter(gson))
 				.build();
 		return ra.create(LocationService.class);
 	}

@@ -18,7 +18,7 @@ public class RestLocation implements Serializable{
 	private String riddle;
 	private double locationLong;
 	private double locationLat;
-	private String riddleImageURL;
+	private String riddleImageUrl;
 	private String key;
 	
 	public int getId() {
@@ -57,11 +57,11 @@ public class RestLocation implements Serializable{
 	public void setKey(String key) {
 		this.key = key;
 	}
-	public String getRiddleImageURL() {
-		return riddleImageURL;
+	public String getRiddleImageUrl() {
+		return riddleImageUrl;
 	}
-	public void setRiddleImageURL(String riddleImageURL) {
-		this.riddleImageURL = riddleImageURL;
+	public void setRiddleImageUrl(String riddleImageUrl) {
+		this.riddleImageUrl = riddleImageUrl;
 	}
 	
 	public Location getLocation() {
