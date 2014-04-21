@@ -37,6 +37,8 @@ public class MainActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		
+		locationList = (ListView)findViewById(R.id.listLocations);
+		
 		/*Test Code for mock location
 		RestLocation location = new RestLocation();
 		location.setId(1);
@@ -52,6 +54,29 @@ public class MainActivity extends Activity {
 		finish();
 		/*End Test Code*/
 		
+		// Get our list of events loaded
+		locationList = (ListView)findViewById(R.id.listLocations);
+ 		locations = LocationDatabaseHelper.getInstance(this).fetchAll();
+ 		if (locations != null && locations.size() > 0) {
+ 			LocationAdapter mLocationAdapter = new LocationAdapter(locations);
+ 			locationList.setAdapter(mLocationAdapter);
+			locationList.setOnItemClickListener(new OnItemClickListener(){
+				
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view,int position, long id) {
+				Intent intent = new Intent(getApplicationContext(), SearchActivity.class);
+				intent.putExtra("restLocation", locations.get(position));
+				startActivity(intent);
+				}
+			});
+		 		} 
+ 		else {
+		 		// We don't yet have any locations...
+		 		((TextView)findViewById(R.id.txtNoLocations)).setVisibility(View.VISIBLE);
+		 		((ListView)findViewById(R.id.listLocations)).setVisibility(View.GONE);
+		 		Log.d("NoLocation", "NoLocations");
+		 }
+ 		
 		// And kick off contacting to server to see if there are any new ones
 		new LocationClient.LocationsDownloader(this) {
 			@Override
@@ -126,7 +151,6 @@ public class MainActivity extends Activity {
 			
 			return v;
 		}
-		
 	}
 	
 	static class Holder {
