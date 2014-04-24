@@ -11,6 +11,9 @@ package edu.uncc.scavenger;
  * stackoverflow.com/questions/5479753/using-orientation-sensor-to-point-towards-a-specific-location
  */
 
+import java.util.ArrayList;
+import java.util.List;
+
 import edu.uncc.scavenger.rest.RestLocation;
 import android.app.Activity;
 import android.content.Context;
@@ -33,6 +36,7 @@ import android.widget.Toast;
 public class CompassActivity extends Activity implements SensorEventListener
 {
 	final int SEARCH_PROXIMITY = 10;
+	final int MOVING_AVERAGE_SIZE = 10;
 	ImageView compassRoseView, arrowView, searchImageView;
 	Button backButton;
 	SensorManager sManager;
@@ -44,6 +48,7 @@ public class CompassActivity extends Activity implements SensorEventListener
 	float[] gravity = new float[3];
 	float[] magneticField = new float[3];
 	float[] coordinates = new float[3];
+	ArrayList<Float> rotationAverage = new ArrayList<Float>(MOVING_AVERAGE_SIZE);
 	LocationManager locationManager;
 	DirectionListener locationListener;
 	Location searchLocation;
@@ -160,10 +165,17 @@ public class CompassActivity extends Activity implements SensorEventListener
 		float trueHeading = (float)(Math.toDegrees(compassValues[0]) + locationListener.getDeclination());
 		//Calculate bearing to search location
 		float rotateArrow = (float) (trueHeading - locationListener.getBearing());
+		// Take moving average of bearing to smooth it out
+		if (rotationAverage.size() == MOVING_AVERAGE_SIZE) {
+			rotationAverage.remove(0);
+		}
+		rotationAverage.add(rotateArrow);
+		float finalRotation = findAverage(rotationAverage);
+		
 		
 		//Rotate compass and arrow. Rotations must be opposite to counteract device movement
 		compassRoseView.setRotation((long)(-1 * trueHeading));
-		arrowView.setRotation((long)(-1 * rotateArrow));
+		arrowView.setRotation((long)(-1 * finalRotation));
 		
 		if(locationListener.getDistance() <= SEARCH_PROXIMITY)
 		{
@@ -183,5 +195,13 @@ public class CompassActivity extends Activity implements SensorEventListener
 	public void onAccuracyChanged(Sensor sensor, int accuracy) {
 		// TODO Auto-generated method stub
 		
+	}
+	
+	private float findAverage(List<Float> list) {
+		float sum = 0.0f;
+		for (Float f : list) {
+			sum += f;
+		}
+		return sum / list.size();
 	}
 }
