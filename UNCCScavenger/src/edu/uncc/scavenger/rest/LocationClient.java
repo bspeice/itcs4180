@@ -16,9 +16,11 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import retrofit.RestAdapter;
+import retrofit.RetrofitError;
 import retrofit.converter.GsonConverter;
 import android.content.Context;
 import android.os.AsyncTask;
+import android.util.Log;
 import edu.uncc.scavenger.R;
 
 public class LocationClient {
@@ -38,7 +40,14 @@ public class LocationClient {
 		Map<String, String> keys = new HashMap<String, String>();
 		keys.put("key", key);
 		keys.put("id", String.valueOf(id));
-		return client.getResult(keys);
+		try
+		{
+			return client.getResult(keys);
+		}
+		catch(RetrofitError e)
+		{
+			return "Verification failed";
+		}
 	}
 
 	public static class LocationsDownloader extends
@@ -52,6 +61,21 @@ public class LocationClient {
 		@Override
 		protected List<RestLocation> doInBackground(Void... arg0) {
 			return getAdapter(ctx).listLocations();
+		}
+	}
+	
+	public static class VerifyAsync extends AsyncTask<String, Void, String>
+	{
+		private Context ctx;
+		
+		public VerifyAsync(Context ctx)
+		{
+			this.ctx = ctx;
+		}
+
+		@Override
+		protected String doInBackground(String... params) {
+			return LocationClient.validateLocation(ctx, Integer.parseInt(params[0]), params[1]);
 		}
 	}
 }

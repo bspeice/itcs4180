@@ -7,6 +7,7 @@ package edu.uncc.scavenger;
  * FoundActivity.java
  */
 
+import edu.uncc.scavenger.rest.RestLocation;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -15,33 +16,31 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.webkit.WebView;
 import android.widget.Button;
 import android.widget.TextView;
 
 public class FoundActivity extends Activity {
 
 	TextView numberFoundText;
-	Button seeMoreButton, tryMoreButton;
+	Button tryMoreButton;
+	WebView moreInfoWebView;
 	Intent intent;
+	RestLocation restLocation;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_found);
 
+		
 		numberFoundText = (TextView)findViewById(R.id.numberFoundText);
-		seeMoreButton = (Button)findViewById(R.id.seeMoreButton);
+		moreInfoWebView = (WebView)findViewById(R.id.moreInfoWebView);
 		tryMoreButton = (Button)findViewById(R.id.tryMoreButton);
 		
-		seeMoreButton.setOnClickListener(new OnClickListener(){
-
-			@Override
-			public void onClick(View v) {
-				//TODO
-				//Get more information address and open web browser
-				
-			}
-		});
+		restLocation = (RestLocation)(getIntent().getSerializableExtra("restLocation"));
+		//moreInfoWebView.loadUrl(restLocation.getKey());
+		
 		tryMoreButton.setOnClickListener(new OnClickListener(){
 
 			@Override

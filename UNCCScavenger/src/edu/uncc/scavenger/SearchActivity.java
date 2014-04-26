@@ -8,7 +8,9 @@ package edu.uncc.scavenger;
  */
 
 import java.net.URL;
+import java.util.List;
 
+import edu.uncc.scavenger.database.LocationDatabaseHelper;
 import edu.uncc.scavenger.rest.RestLocation;
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -52,7 +54,7 @@ public class SearchActivity extends Activity {
 		riddleView = (TextView)findViewById(R.id.riddleView);
 		
 		restLocation = (RestLocation)(getIntent().getSerializableExtra("restLocation"));
-		Log.d("restLocation", restLocation.getName());
+		//Log.d("restLocation", restLocation.getName());
 		
 		locationText.setText(restLocation.getName());
 		riddleView.setText(restLocation.getRiddle());
@@ -130,7 +132,7 @@ public class SearchActivity extends Activity {
 			}
 		});
 		
-		Toast.makeText(getApplicationContext(), restLocation.getRiddleImageUrl(), Toast.LENGTH_SHORT).show();
+		//Toast.makeText(getApplicationContext(), restLocation.getRiddleImageUrl(), Toast.LENGTH_SHORT).show();
 		Bitmap locationPicture = BitmapAccess.loadBitmap(this, restLocation.getName());
 		if(locationPicture != null)
 		{
@@ -171,7 +173,14 @@ public class SearchActivity extends Activity {
             	String contents = data.getStringExtra("SCAN_RESULT"); 
                 if(contents.equals(restLocation.getName()))
                 {
+                	//Add found to the database
+                	/*List locations = LocationDatabaseHelper.getInstance(this).fetchAll();
+             		if (locations != null && locations.size() > 0)
+             		{
+             				locations.get(restLocation.getId()-1);
+             		}*/
                 	intent = new Intent(SearchActivity.this, FoundActivity.class);
+                	intent.putExtra("restLocation", restLocation);
                 	startActivity(intent);
                 	finish();
                 }

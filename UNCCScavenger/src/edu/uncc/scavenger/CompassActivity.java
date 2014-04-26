@@ -99,7 +99,7 @@ public class CompassActivity extends Activity implements SensorEventListener
 			}
 		});
 		
-		Toast.makeText(this, ""+searchLocation.getLatitude()+", "+searchLocation.getLongitude(), Toast.LENGTH_SHORT).show();
+		//Toast.makeText(this, ""+searchLocation.getLatitude()+", "+searchLocation.getLongitude(), Toast.LENGTH_SHORT).show();
 	}
 
 	@Override

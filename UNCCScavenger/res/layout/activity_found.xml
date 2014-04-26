@@ -23,19 +23,11 @@
         android:text="@string/default_text"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
-    <ImageView
-        android:id="@+id/foundImageView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:src="@drawable/map" />
-
-    <Button
-        android:id="@+id/seeMoreButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:text="@string/see_more_text" />
+    <WebView
+        android:id="@+id/moreInfoWebView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1" />
 
     <Button
         android:id="@+id/tryMoreButton"

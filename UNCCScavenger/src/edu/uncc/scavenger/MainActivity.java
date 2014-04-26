@@ -31,6 +31,7 @@ public class MainActivity extends Activity {
 	
 	ListView locationList;
 	List<RestLocation> locations;
+	static String key;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -98,7 +99,15 @@ public class MainActivity extends Activity {
 			}
 		}.execute();
 		
-		//Toast.makeText(getApplicationContext(), ""+locations.get(0).getRiddleImageUrl(), Toast.LENGTH_SHORT).show();
+		new LocationClient.VerifyAsync(this) {
+			@Override
+			protected void onPostExecute(String result) {
+				super.onPostExecute(result);
+				key = result;
+				Toast.makeText(getApplicationContext(), key, Toast.LENGTH_SHORT).show();
+			}
+		}.execute("1", "Belk Tower");
+		
 	}
 
 	@Override
