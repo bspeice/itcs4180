@@ -113,12 +113,24 @@ public class LocationDatabaseHelper extends SQLiteOpenHelper {
 		values.put(KEY_LOCATION_LAT, loc.getLocationLat());
 		values.put(KEY_VALIDATION_KEY, loc.getKey());
 		values.put(KEY_RIDDLE_IMAGE_URL, loc.getRiddleImageUrl());
-		helper.getWritableDatabase().insertWithOnConflict(TABLE_NAME, null, values, SQLiteDatabase.CONFLICT_REPLACE);
+		helper.getWritableDatabase().insertWithOnConflict(TABLE_NAME, null, values, SQLiteDatabase.CONFLICT_IGNORE);
 	}
 	
 	public void persistAll(List<RestLocation> locs) {
 		for (RestLocation l : locs) {
 			persist(l);
 		}
+	}
+	
+	public void updateRecord(RestLocation loc){
+		ContentValues values = new ContentValues();
+		values.put(KEY_ID, loc.getId());
+		values.put(KEY_NAME, loc.getName());
+		values.put(KEY_RIDDLE, loc.getRiddle());
+		values.put(KEY_LOCATION_LONG, loc.getLocationLong());
+		values.put(KEY_LOCATION_LAT, loc.getLocationLat());
+		values.put(KEY_VALIDATION_KEY, loc.getKey());
+		values.put(KEY_RIDDLE_IMAGE_URL, loc.getRiddleImageUrl());
+		helper.getWritableDatabase().insertWithOnConflict(TABLE_NAME, null, values, SQLiteDatabase.CONFLICT_REPLACE);
 	}
 }

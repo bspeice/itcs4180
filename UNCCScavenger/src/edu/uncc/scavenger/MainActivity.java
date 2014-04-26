@@ -32,7 +32,6 @@ public class MainActivity extends Activity {
 	
 	ListView locationList;
 	List<RestLocation> locations;
-	static String key;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -76,7 +75,7 @@ public class MainActivity extends Activity {
 		 		// We don't yet have any locations...
 		 		((TextView)findViewById(R.id.txtNoLocations)).setVisibility(View.VISIBLE);
 		 		((ListView)findViewById(R.id.listLocations)).setVisibility(View.GONE);
-		 		Log.d("NoLocation", "NoLocations");
+		 		//Log.d("NoLocation", "NoLocations");
 		 }
  		
 		// And kick off contacting to server to see if there are any new ones
@@ -86,8 +85,22 @@ public class MainActivity extends Activity {
 			protected void onPostExecute(List<RestLocation> result) {
 				super.onPostExecute(result);
 				// And update our adapter when done
-				LocationAdapter mLocationAdapter = new LocationAdapter(result);
+				for(int x=0; x<locations.size(); x++)
+				{
+					result.remove(0);
+				}
+				locations.addAll(result);
+				LocationAdapter mLocationAdapter = new LocationAdapter(locations);
 				locationList.setAdapter(mLocationAdapter);
+				locationList.setOnItemClickListener(new OnItemClickListener(){
+					
+					@Override
+					public void onItemClick(AdapterView<?> parent, View view,int position, long id) {
+						Intent intent = new Intent(MainActivity.this, SearchActivity.class);
+						intent.putExtra("restLocation", locations.get(position));
+						startActivity(intent);
+						}
+					});
 				
 				// Always show the ListView and hide the TextView
 				// We're back on the main thread at this point, so it's legal.
@@ -95,11 +108,10 @@ public class MainActivity extends Activity {
 				((ListView)findViewById(R.id.listLocations)).setVisibility(View.VISIBLE);
 				
 				// And we're even kind enough to update the database
-				LocationDatabaseHelper.getInstance(MainActivity.this).persistAll(result);
-				locations = LocationDatabaseHelper.getInstance(getBaseContext()).fetchAll();
+				LocationDatabaseHelper.getInstance(MainActivity.this).persistAll(locations);
+				locations = LocationDatabaseHelper.getInstance(MainActivity.this).fetchAll();
 			}
 		}.execute();
-		
 	}
 
 	@Override
@@ -142,6 +154,15 @@ public class MainActivity extends Activity {
 				holder.imgFound = (ImageView)v.findViewById(R.id.imgIsFound);
 				holder.name = (TextView)v.findViewById(R.id.txtName);
 				holder.riddle = (TextView)v.findViewById(R.id.txtRiddle);
+				
+				if(locations.get(position).getKey()!=null)
+				{
+					holder.imgFound.setImageResource(R.drawable.checkbox_checked);
+				}
+				else
+				{
+					holder.imgFound.setImageResource(R.drawable.checkbox_unchecked);
+				}
 				
 				v.setTag(holder);
 			} else {

@@ -181,13 +181,8 @@ public class SearchActivity extends Activity {
         				Toast.makeText(getApplicationContext(), key, Toast.LENGTH_SHORT).show();
         				if(key!= null)
                         {
-                        	//Add found to the database
-                        	/*List locations = LocationDatabaseHelper.getInstance(this).fetchAll();
-                     		if (locations != null && locations.size() > 0)
-                     		{
-                     				locations.get(restLocation.getId()-1);
-                     		}*/
                         	restLocation.setKey(key);
+                        	LocationDatabaseHelper.getInstance(SearchActivity.this).updateRecord(restLocation);
                         	intent = new Intent(SearchActivity.this, FoundActivity.class);
                         	intent.putExtra("restLocation", restLocation);
                         	startActivity(intent);
