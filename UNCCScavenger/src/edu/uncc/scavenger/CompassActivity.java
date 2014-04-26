@@ -175,7 +175,7 @@ public class CompassActivity extends Activity implements SensorEventListener
 		
 		//Rotate compass and arrow. Rotations must be opposite to counteract device movement
 		compassRoseView.setRotation((long)(-1 * trueHeading));
-		arrowView.setRotation((long)(-1 * finalRotation));
+		arrowView.setRotation((long)(-1 * rotateArrow));
 		
 		if(locationListener.getDistance() <= SEARCH_PROXIMITY)
 		{
