@@ -74,7 +74,7 @@ public class MainActivity extends Activity {
 		 		// We don't yet have any locations...
 		 		((TextView)findViewById(R.id.txtNoLocations)).setVisibility(View.VISIBLE);
 		 		((ListView)findViewById(R.id.listLocations)).setVisibility(View.GONE);
-		 		//Log.d("NoLocation", "NoLocations");
+		 		//Log.d("Location", "NoLocations");
 		 }
  		
 		// And kick off contacting to server to see if there are any new ones
