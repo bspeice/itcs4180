@@ -48,7 +48,7 @@ public class CompassActivity extends Activity implements SensorEventListener
 	float[] gravity = new float[3];
 	float[] magneticField = new float[3];
 	float[] coordinates = new float[3];
-	ArrayList<Float> rotationAverage = new ArrayList<Float>(MOVING_AVERAGE_SIZE);
+	//ArrayList<Float> rotationAverage = new ArrayList<Float>(MOVING_AVERAGE_SIZE);
 	LocationManager locationManager;
 	DirectionListener locationListener;
 	Location searchLocation;
@@ -164,16 +164,18 @@ public class CompassActivity extends Activity implements SensorEventListener
 		float trueHeading = (float)(Math.toDegrees(compassValues[0]) + locationListener.getDeclination());
 		//Calculate bearing to search location
 		float rotateArrow = (float) (trueHeading - locationListener.getBearing());
-		// Take moving average of bearing to smooth it out
+		
+		//Add rotate average later. Does not handle wrap around when exactly at 0 degrees
+		/* Take moving average of bearing to smooth it out
 		if (rotationAverage.size() == MOVING_AVERAGE_SIZE) {
 			rotationAverage.remove(0);
 		}
 		rotationAverage.add(rotateArrow);
-		float finalRotation = findAverage(rotationAverage);
+		float finalRotation = findAverage(rotationAverage);*/
 		
 		
 		//Rotate compass and arrow. Rotations must be opposite to counteract device movement
-		arrowView.setRotation((long)(-1 * finalRotation));
+		arrowView.setRotation((long)(-1 * rotateArrow));
 		
 		if(locationListener.getDistance() <= SEARCH_PROXIMITY)
 		{
@@ -193,11 +195,12 @@ public class CompassActivity extends Activity implements SensorEventListener
 		
 	}
 	
-	private float findAverage(List<Float> list) {
+	/*private float findAverage(List<Float> list) {
 		float sum = 0.0f;
 		for (Float f : list) {
 			sum += f;
 		}
+		Toast.makeText(CompassActivity.this, ""+(sum/list.size()), Toast.LENGTH_SHORT).show();
 		return sum / list.size();
-	}
+	}*/
 }
