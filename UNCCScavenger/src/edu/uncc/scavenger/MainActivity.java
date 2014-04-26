@@ -154,7 +154,7 @@ public class MainActivity extends Activity {
 				holder.name = (TextView)v.findViewById(R.id.txtName);
 				holder.riddle = (TextView)v.findViewById(R.id.txtRiddle);
 				
-				if(locations.get(position).getKey()!=null)
+				if(!locations.get(position).getKey().equals(""))
 				{
 					holder.imgFound.setImageResource(R.drawable.checkbox_checked);
 				}
