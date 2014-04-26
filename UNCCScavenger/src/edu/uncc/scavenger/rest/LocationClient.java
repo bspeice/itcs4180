@@ -35,11 +35,11 @@ public class LocationClient {
 		return ra.create(LocationService.class);
 	}
 
-	public static String validateLocation(Context ctx, int id, String key) {
+	public static String validateLocation(Context ctx, String name, String key) {
 		LocationService client = getAdapter(ctx);
 		Map<String, String> keys = new HashMap<String, String>();
 		keys.put("key", key);
-		keys.put("id", String.valueOf(id));
+		keys.put("name", name);
 		try
 		{
 			return client.getResult(keys);
@@ -75,7 +75,7 @@ public class LocationClient {
 
 		@Override
 		protected String doInBackground(String... params) {
-			return LocationClient.validateLocation(ctx, Integer.parseInt(params[0]), params[1]);
+			return LocationClient.validateLocation(ctx, params[0], params[1]);
 		}
 	}
 }
