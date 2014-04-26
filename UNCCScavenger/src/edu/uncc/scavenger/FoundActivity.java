@@ -39,7 +39,7 @@ public class FoundActivity extends Activity {
 		tryMoreButton = (Button)findViewById(R.id.tryMoreButton);
 		
 		restLocation = (RestLocation)(getIntent().getSerializableExtra("restLocation"));
-		//moreInfoWebView.loadUrl(restLocation.getKey());
+		moreInfoWebView.loadData(restLocation.getKey(), "text/html", "UTF-8");
 		
 		tryMoreButton.setOnClickListener(new OnClickListener(){
 
@@ -50,9 +50,6 @@ public class FoundActivity extends Activity {
 				finish();
 			}
 		});
-		
-		//TODO
-		//Add found location to database
 	}
 
 	@Override

@@ -12,6 +12,7 @@ import java.util.List;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
@@ -98,15 +99,6 @@ public class MainActivity extends Activity {
 				locations = LocationDatabaseHelper.getInstance(getBaseContext()).fetchAll();
 			}
 		}.execute();
-		
-		new LocationClient.VerifyAsync(this) {
-			@Override
-			protected void onPostExecute(String result) {
-				super.onPostExecute(result);
-				key = result;
-				Toast.makeText(getApplicationContext(), key, Toast.LENGTH_SHORT).show();
-			}
-		}.execute("1", "Belk Tower");
 		
 	}
 

@@ -11,6 +11,7 @@ import java.net.URL;
 import java.util.List;
 
 import edu.uncc.scavenger.database.LocationDatabaseHelper;
+import edu.uncc.scavenger.rest.LocationClient;
 import edu.uncc.scavenger.rest.RestLocation;
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -41,6 +42,7 @@ public class SearchActivity extends Activity {
 	TextView locationText, riddleView;
 	Intent intent;
 	RestLocation restLocation;
+	String key;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -171,23 +173,32 @@ public class SearchActivity extends Activity {
             if (resultCode == RESULT_OK)
             {
             	String contents = data.getStringExtra("SCAN_RESULT"); 
-                if(contents.equals(restLocation.getName()))
-                {
-                	//Add found to the database
-                	/*List locations = LocationDatabaseHelper.getInstance(this).fetchAll();
-             		if (locations != null && locations.size() > 0)
-             		{
-             				locations.get(restLocation.getId()-1);
-             		}*/
-                	intent = new Intent(SearchActivity.this, FoundActivity.class);
-                	intent.putExtra("restLocation", restLocation);
-                	startActivity(intent);
-                	finish();
-                }
-                else
-                {
-                	Toast.makeText(SearchActivity.this, "Incorrect place found: "+contents, Toast.LENGTH_SHORT).show();
-                }
+            	new LocationClient.VerifyAsync(this) {
+        			@Override
+        			protected void onPostExecute(String result) {
+        				super.onPostExecute(result);
+        				key = result;
+        				Toast.makeText(getApplicationContext(), key, Toast.LENGTH_SHORT).show();
+        				if(key!= null)
+                        {
+                        	//Add found to the database
+                        	/*List locations = LocationDatabaseHelper.getInstance(this).fetchAll();
+                     		if (locations != null && locations.size() > 0)
+                     		{
+                     				locations.get(restLocation.getId()-1);
+                     		}*/
+                        	restLocation.setKey(key);
+                        	intent = new Intent(SearchActivity.this, FoundActivity.class);
+                        	intent.putExtra("restLocation", restLocation);
+                        	startActivity(intent);
+                        	finish();
+                        }
+                        else
+                        {
+                        	Toast.makeText(SearchActivity.this, "Incorrect place found", Toast.LENGTH_SHORT).show();
+                        }
+        			}
+        		}.execute(restLocation.getName(), contents);
             } 
             else if (resultCode == RESULT_CANCELED) 
             {
