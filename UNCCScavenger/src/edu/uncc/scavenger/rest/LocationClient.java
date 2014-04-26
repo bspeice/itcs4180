@@ -46,7 +46,7 @@ public class LocationClient {
 		}
 		catch(RetrofitError e)
 		{
-			return "Verification failed";
+			return null;
 		}
 	}
 
