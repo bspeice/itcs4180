@@ -13,15 +13,6 @@
         android:layout_weight="1" >
 
         <ImageView
-            android:id="@+id/compassRoseView"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true"
-            android:layout_weight="1"
-            android:src="@drawable/compass_rose_brosen" />
-
-        <ImageView
             android:id="@+id/arrowView"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"

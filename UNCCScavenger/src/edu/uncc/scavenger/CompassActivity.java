@@ -36,8 +36,8 @@ import android.widget.Toast;
 public class CompassActivity extends Activity implements SensorEventListener
 {
 	final int SEARCH_PROXIMITY = 10;
-	final int MOVING_AVERAGE_SIZE = 10;
-	ImageView compassRoseView, arrowView, searchImageView;
+	final int MOVING_AVERAGE_SIZE = 20;
+	ImageView arrowView, searchImageView;
 	Button backButton;
 	SensorManager sManager;
 	Sensor aSensor, mSensor;
@@ -62,7 +62,6 @@ public class CompassActivity extends Activity implements SensorEventListener
 		restLocation = (RestLocation)(getIntent().getSerializableExtra("restLocation"));
 		
 		arrowView = (ImageView)findViewById(R.id.arrowView);
-		compassRoseView = (ImageView)findViewById(R.id.compassRoseView);
 		searchImageView = (ImageView)findViewById(R.id.searchImageView);
 		searchImageView.setVisibility(View.INVISIBLE);
 		Bitmap b = BitmapAccess.loadBitmap(this, restLocation.getName());
@@ -174,19 +173,16 @@ public class CompassActivity extends Activity implements SensorEventListener
 		
 		
 		//Rotate compass and arrow. Rotations must be opposite to counteract device movement
-		compassRoseView.setRotation((long)(-1 * trueHeading));
-		arrowView.setRotation((long)(-1 * rotateArrow));
+		arrowView.setRotation((long)(-1 * finalRotation));
 		
 		if(locationListener.getDistance() <= SEARCH_PROXIMITY)
 		{
 			arrowView.setVisibility(View.INVISIBLE);
-			compassRoseView.setVisibility(View.INVISIBLE);
 			searchImageView.setVisibility(View.VISIBLE);
 		}
 		else
 		{
 			arrowView.setVisibility(View.VISIBLE);
-			compassRoseView.setVisibility(View.VISIBLE);
 			searchImageView.setVisibility(View.INVISIBLE);
 		}
 	}
