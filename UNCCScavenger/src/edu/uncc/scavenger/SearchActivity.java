@@ -177,7 +177,7 @@ public class SearchActivity extends Activity {
         			protected void onPostExecute(String result) {
         				super.onPostExecute(result);
         				key = result;
-        				Toast.makeText(getApplicationContext(), key, Toast.LENGTH_SHORT).show();
+        				//Toast.makeText(getApplicationContext(), key, Toast.LENGTH_SHORT).show();
         				if(key!= null)
                         {
                         	restLocation.setKey(key);
