@@ -8,7 +8,6 @@ package edu.uncc.scavenger;
  */
 
 import java.net.URL;
-import java.util.List;
 
 import edu.uncc.scavenger.database.LocationDatabaseHelper;
 import edu.uncc.scavenger.rest.LocationClient;

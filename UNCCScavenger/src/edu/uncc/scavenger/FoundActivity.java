@@ -11,7 +11,6 @@ import edu.uncc.scavenger.rest.RestLocation;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -33,10 +32,11 @@ public class FoundActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_found);
 
-		
 		numberFoundText = (TextView)findViewById(R.id.numberFoundText);
 		moreInfoWebView = (WebView)findViewById(R.id.moreInfoWebView);
 		tryMoreButton = (Button)findViewById(R.id.tryMoreButton);
+		
+		numberFoundText.setVisibility(View.INVISIBLE);
 		
 		restLocation = (RestLocation)(getIntent().getSerializableExtra("restLocation"));
 		moreInfoWebView.loadData(restLocation.getKey(), "text/html", "UTF-8");
