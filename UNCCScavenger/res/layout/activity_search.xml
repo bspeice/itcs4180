@@ -44,6 +44,12 @@
         android:layout_weight="0"
         android:orientation="vertical" >
 
+        <Button
+            android:id="@+id/btnViewResult"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="View Result" />
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content" >

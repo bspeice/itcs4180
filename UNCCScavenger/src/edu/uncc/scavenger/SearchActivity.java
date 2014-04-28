@@ -37,7 +37,7 @@ import android.widget.Toast;
 public class SearchActivity extends Activity {
 
 	ImageView locationImage;
-	Button compassButton, scanButton;
+	Button compassButton, scanButton, resultButton;
 	TextView locationText, riddleView;
 	Intent intent;
 	RestLocation restLocation;
@@ -52,6 +52,7 @@ public class SearchActivity extends Activity {
 		locationImage = (ImageView)findViewById(R.id.locationImage);
 		compassButton = (Button)findViewById(R.id.compassButton);
 		scanButton = (Button)findViewById(R.id.scanButton);
+		resultButton = (Button)findViewById(R.id.btnViewResult);
 		riddleView = (TextView)findViewById(R.id.riddleView);
 		
 		restLocation = (RestLocation)(getIntent().getSerializableExtra("restLocation"));
@@ -59,6 +60,9 @@ public class SearchActivity extends Activity {
 		
 		locationText.setText(restLocation.getName());
 		riddleView.setText(restLocation.getRiddle());
+		if (restLocation.getKey() != null) {
+			resultButton.setVisibility(View.VISIBLE);
+		}
 		
 		scanButton.setOnClickListener(new OnClickListener(){
 
@@ -130,6 +134,15 @@ public class SearchActivity extends Activity {
 					AlertDialog alert = builder.create();
 					alert.show();
 				}
+			}
+		});
+		
+		resultButton.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View arg0) {
+				Intent i = new Intent(SearchActivity.this, FoundActivity.class);
+				i.putExtra("restLocation", restLocation);
+				startActivity(i);
 			}
 		});
 		
