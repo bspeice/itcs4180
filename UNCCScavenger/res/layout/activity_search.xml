@@ -48,7 +48,7 @@
             android:id="@+id/btnViewResult"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="View Result" />
+            android:text="@string/btnViewResult" />
 
         <LinearLayout
             android:layout_width="match_parent"
