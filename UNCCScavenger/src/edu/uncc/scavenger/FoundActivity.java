@@ -15,6 +15,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.ViewDebug.FlagToString;
 import android.webkit.WebView;
 import android.widget.Button;
 import android.widget.TextView;
@@ -46,6 +47,7 @@ public class FoundActivity extends Activity {
 			@Override
 			public void onClick(View v) {
 				intent = new Intent(FoundActivity.this, MainActivity.class);
+				intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP); // Clear the back stack
 				startActivity(intent);
 				finish();
 			}
