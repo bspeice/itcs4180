@@ -11,7 +11,6 @@ import android.hardware.GeomagneticField;
 import android.location.Location;
 import android.location.LocationListener;
 import android.os.Bundle;
-import android.widget.TextView;
 
 public class DirectionListener implements LocationListener 
 {
@@ -30,8 +29,6 @@ public class DirectionListener implements LocationListener
 	@Override
 	public void onLocationChanged(Location location) 
 	{
-		//String lat = ""+location.getLatitude();
-		//String lon = ""+location.getLongitude();
 		
 		geoField = new GeomagneticField(
 				(float)location.getLatitude(),

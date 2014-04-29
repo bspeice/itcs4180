@@ -12,17 +12,13 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.ViewDebug.FlagToString;
 import android.webkit.WebView;
 import android.widget.Button;
-import android.widget.TextView;
 
 public class FoundActivity extends Activity {
 
-	TextView numberFoundText;
 	Button tryMoreButton;
 	WebView moreInfoWebView;
 	Intent intent;
@@ -33,11 +29,8 @@ public class FoundActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_found);
 
-		numberFoundText = (TextView)findViewById(R.id.numberFoundText);
 		moreInfoWebView = (WebView)findViewById(R.id.moreInfoWebView);
 		tryMoreButton = (Button)findViewById(R.id.tryMoreButton);
-		
-		numberFoundText.setVisibility(View.INVISIBLE);
 		
 		restLocation = (RestLocation)(getIntent().getSerializableExtra("restLocation"));
 		moreInfoWebView.loadData(restLocation.getKey(), "text/html", "UTF-8");

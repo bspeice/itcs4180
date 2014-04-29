@@ -20,7 +20,6 @@ import retrofit.RetrofitError;
 import retrofit.converter.GsonConverter;
 import android.content.Context;
 import android.os.AsyncTask;
-import android.util.Log;
 import edu.uncc.scavenger.R;
 
 public class LocationClient {

@@ -12,7 +12,6 @@ import java.util.List;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,7 +21,6 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 import edu.uncc.scavenger.database.LocationDatabaseHelper;
 import edu.uncc.scavenger.rest.LocationClient;
 import edu.uncc.scavenger.rest.RestLocation;
@@ -38,21 +36,6 @@ public class MainActivity extends Activity {
 		setContentView(R.layout.activity_main);
 		
 		locationList = (ListView)findViewById(R.id.listLocations);
-		
-		/*Test Code for mock location
-		RestLocation location = new RestLocation();
-		location.setId(1);
-		location.setName("Bridge");
-		location.setRiddle("Riddle");
-		location.setLocationLong(-80.733734);
-		location.setLocationLat(35.310043);
-		location.setKey("Key");
-		location.setRiddleImageURL("http://rmss.uncc.edu/sites/rmss.uncc.edu/files/media/Belk%20Tower.jpg");
-		Intent intent = new Intent(getApplicationContext(), SearchActivity.class);
-		intent.putExtra("restLocation", location);
-		startActivity(intent);
-		finish();
-		/*End Test Code*/
 		
 		// Get our list of events loaded
 		locationList = (ListView)findViewById(R.id.listLocations);
@@ -74,7 +57,6 @@ public class MainActivity extends Activity {
 		 		// We don't yet have any locations...
 		 		((TextView)findViewById(R.id.txtNoLocations)).setVisibility(View.VISIBLE);
 		 		((ListView)findViewById(R.id.listLocations)).setVisibility(View.GONE);
-		 		//Log.d("Location", "NoLocations");
 		 }
  		
 		// And kick off contacting to server to see if there are any new ones

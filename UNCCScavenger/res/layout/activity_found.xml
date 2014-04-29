@@ -16,14 +16,6 @@
         android:text="@string/found_text"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
-    <TextView
-        android:id="@+id/numberFoundText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:text="@string/default_text"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
-
     <WebView
         android:id="@+id/moreInfoWebView"
         android:layout_width="match_parent"
