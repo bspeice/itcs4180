@@ -57,7 +57,7 @@ public class SearchActivity extends Activity {
 		
 		locationText.setText(restLocation.getName());
 		riddleView.setText(restLocation.getRiddle());
-		if (restLocation.getKey() != null) {
+		if (restLocation.getKey() != null && restLocation.getKey().compareTo("")!=0) {
 			resultButton.setVisibility(View.VISIBLE);
 		}
 		
