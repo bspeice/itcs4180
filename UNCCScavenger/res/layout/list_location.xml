@@ -19,7 +19,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_toRightOf="@+id/imgIsFound"
-        android:text="TextView"
+        android:text="@string/default_text"
         android:textSize="20sp" />
 
     <TextView
@@ -28,7 +28,7 @@
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/txtName"
         android:layout_below="@+id/txtName"
-        android:text="TextView"
+        android:text="@string/default_text"
         android:textColor="@android:color/secondary_text_light"
         android:textSize="15sp" />
 

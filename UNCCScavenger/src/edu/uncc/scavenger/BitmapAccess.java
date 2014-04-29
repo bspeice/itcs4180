@@ -4,7 +4,7 @@ package edu.uncc.scavenger;
  * Bradlee Speice, Brandon Rodenmayer
  * ITIS 4180
  * UNCCScavenger (NinerFinder)
- * CompassActivity.java
+ * BitmapAccess.java
  */
 
 //Reference: stackoverflow.com/questions/19978100/how-to-save-bitmap-on-internal-storage-download-from-internet

@@ -109,7 +109,6 @@ public class CompassActivity extends Activity implements SensorEventListener
 		return true;
 	}
 
-
 	@Override
 	public void onSensorChanged(SensorEvent event) 
 	{
@@ -133,6 +132,7 @@ public class CompassActivity extends Activity implements SensorEventListener
 		SensorManager.getRotationMatrix(rotation, inclination, gravity, magneticField);
 		SensorManager.getOrientation(rotation, compassValues);
 		
+		//azimuth is compassValues[0]
 		//Calculate true north and angle to desired location
 		float trueHeading = (float)(Math.toDegrees(compassValues[0]) + locationListener.getDeclination());
 		//Calculate bearing to search location
